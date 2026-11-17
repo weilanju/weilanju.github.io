@@ -1,0 +1,54 @@
+company_id,ticker,company_name,value_chain_segment,segment_rank,in_degree,out_degree
+C_ASML,ASML,ASML Holding N.V.,semi_equipment_eda,1,0,2
+C_AMAT,AMAT,"Applied Materials, Inc.",semi_equipment_eda,1,0,0
+C_LRCX,LRCX,Lam Research Corporation,semi_equipment_eda,1,0,0
+C_KLAC,KLAC,KLA Corporation,semi_equipment_eda,1,0,0
+C_SNPS,SNPS,"Synopsys, Inc.",semi_equipment_eda,1,0,0
+C_CDNS,CDNS,"Cadence Design Systems, Inc.",semi_equipment_eda,1,0,0
+C_TSM,TSM,"Taiwan Semiconductor Manufacturing Co., Ltd.",foundry_packaging,2,3,5
+C_INTC,INTC,Intel Corporation,foundry_packaging,2,2,1
+C_AMKR,AMKR,"Amkor Technology, Inc.",foundry_packaging,2,1,1
+C_NVDA,NVDA,NVIDIA Corporation,compute_chips,4,11,10
+C_AMD,AMD,"Advanced Micro Devices, Inc.",compute_chips,4,2,2
+C_AVGO,AVGO,Broadcom Inc.,compute_chips,4,2,1
+C_MRVL,MRVL,"Marvell Technology, Inc.",compute_chips,4,0,1
+C_ARM,ARM,Arm Holdings plc,compute_chips,4,0,0
+C_MU,MU,"Micron Technology, Inc.",memory_storage,3,1,3
+C_WDC,WDC,Western Digital Corporation,memory_storage,3,0,0
+C_STX,STX,Seagate Technology Holdings plc,memory_storage,3,0,0
+C_SNDK,SNDK,Sandisk Corporation,memory_storage,3,0,0
+C_P,P,"Everpure, Inc. (formerly Pure Storage, Inc.)",memory_storage,3,0,0
+C_ANET,ANET,"Arista Networks, Inc.",networking,5,2,0
+C_CSCO,CSCO,"Cisco Systems, Inc.",networking,5,1,1
+C_CIEN,CIEN,Ciena Corporation,networking,5,0,0
+C_COHR,COHR,Coherent Corp.,networking,5,0,1
+C_LITE,LITE,Lumentum Holdings Inc.,networking,5,0,1
+C_CRDO,CRDO,Credo Technology Group Holding Ltd,networking,5,1,0
+C_SMCI,SMCI,"Super Micro Computer, Inc.",servers,6,1,1
+C_DELL,DELL,Dell Technologies Inc.,servers,6,1,1
+C_HPE,HPE,Hewlett Packard Enterprise Company,servers,6,1,0
+C_VRT,VRT,Vertiv Holdings Co,power_cooling,0,1,1
+C_ETN,ETN,Eaton Corporation plc,power_cooling,0,0,1
+C_GEV,GEV,GE Vernova Inc.,power_cooling,0,0,0
+C_MOD,MOD,Modine Manufacturing Company,power_cooling,0,0,0
+C_EQIX,EQIX,"Equinix, Inc.",data_center,7,0,0
+C_DLR,DLR,"Digital Realty Trust, Inc.",data_center,7,0,0
+C_CRWV,CRWV,"CoreWeave, Inc.",data_center,7,0,4
+C_ORCL,ORCL,Oracle Corporation,cloud_buyers,8,2,1
+C_MSFT,MSFT,Microsoft Corporation,cloud_buyers,8,1,2
+C_AMZN,AMZN,"Amazon.com, Inc.",cloud_buyers,8,1,1
+C_GOOGL,GOOGL,Alphabet Inc.,cloud_buyers,8,0,1
+C_META,META,"Meta Platforms, Inc.",cloud_buyers,8,2,1
+N_OPENAI,,OpenAI,cloud_buyers,8,4,1
+N_ANTHROPIC,,Anthropic PBC,cloud_buyers,8,2,0
+N_XAI,,xAI Corp.,cloud_buyers,8,2,0
+N_STARGATE,,Stargate LLC (OpenAI/SoftBank/Oracle/MGX JV),data_center,7,1,0
+N_SKHYNIX,,SK hynix Inc.,memory_storage,3,0,1
+N_SAMSUNG,,"Samsung Electronics Co., Ltd.",memory_storage,3,0,0
+N_FOXCONN,,"Hon Hai Precision Industry Co., Ltd. (Foxconn)",servers,6,0,0
+N_QUANTA,,Quanta Computer Inc.,servers,6,0,0
+N_SOFTBANK,,SoftBank Group Corp.,cloud_buyers,8,0,0
+N_GE,GE,General Electric Company (GE Aerospace),power_cooling,0,0,0
+N_JUNIPER,JNPR,"Juniper Networks, Inc.",networking,5,0,0
+N_ZT,,ZT Systems,servers,6,0,0
+N_MGX,,MGX,cloud_buyers,8,0,0
