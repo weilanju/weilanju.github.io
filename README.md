@@ -10,7 +10,7 @@ look like?**
 | Item | What it is |
 |---|---|
 | [Asset Universe (interactive)](asset_universe_en.html) | Interactive observatory of a 33-firm AI-infrastructure market: layered and spherical views of price, value and information state over 948 trading days. Open in a browser; no install. |
-| [`market-sim/`](market-sim/) | Code, pre-registered protocol, input data and results for the four-agent price-fitting experiment. Includes the null result and the limitations. |
+| [`market-sim/`](market-sim/) | Code, protocol (frozen before running), input data and results for the four-agent price-fitting experiment. Includes the null result and the limitations. |
 | [`empirical/`](empirical/) | Supply-chain information diffusion: the merged 14-module code, the unified result table, and the full reasoning notes. Derived panel not redistributed. |
 | [`docs/`](docs/) | Design handbook v1.2.1 (English) — the honest record of what the system does and does not claim to do, including the specified-but-not-run matching engine. |
 | [`WTI_stable_offline_dashboard_.html`](WTI_stable_offline_dashboard_.html) | Dashboard for my master's thesis: a neural heterogeneous-agent model of WTI, 986 weekly observations. |
