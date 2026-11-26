@@ -776,7 +776,450 @@ body.layer-presentation .p2f-detail{max-width:440px;width:29vw}body.layer-presen
 @media(max-width:700px){#extractedLayers{left:0;right:0;top:35vh;bottom:20vh;grid-template-rows:38px minmax(0,1fr) 52px}.xl-head{gap:4px}.xl-head>span{font-size:7px}.xl-head b{font-size:10px}.xl-head small{display:none}.xl-legend{top:6px;font-size:7px;gap:11px}.xl-corner{left:15px;top:27px;gap:3px}.xl-corner>span{font-size:8px}.xl-corner small{font-size:6px}.xl-hint{font-size:7px;bottom:2px}.xl-layer-label{font-size:7px;padding:3px 4px}.xl-asset-label{font-size:8px}.xl-footer{margin:0 18px;gap:4px}#xlLayers{gap:10px}#xlLayers button{font-size:8px;padding:4px 0}.xl-caption{font-size:7px}.xl-control-label,.xl-help{display:none}.xl-controls{gap:4px}.xl-control{font-size:8px;padding:5px 6px}body.layer-presentation .p2f-detail{width:auto;max-width:none;max-height:27vh;right:22px}body.layer-presentation #p2fLive{display:none}body.layer-presentation .p2f-ref{font-size:7px}.xl-control-extra{display:none}}
 
 body.layer-presentation .p2f-footer{font-size:0}body.layer-presentation .p2f-footer:after{content:"EXTRACTED VISUALS / 33 ASSET ANCHORS";font:7px Consolas,monospace;letter-spacing:.15em}
-</style></head>
+</style>
+<style id="p0-p1-academic-audit-upgrade">
+:root {
+  --ink: #f3f9fe;
+  --ink2: #d4e4f2;
+  --muted: #b3cadc;
+  --faint: #a4bdd1;
+}
+
+/* Unified Data-Source Badges (P0 #4) */
+.data-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font: 600 11px/1.35 var(--mono);
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.data-badge.real {
+  background: rgba(92, 201, 143, 0.16);
+  color: #b4f7d1;
+  border: 1px solid rgba(92, 201, 143, 0.46);
+}
+.data-badge.sim {
+  background: rgba(233, 186, 117, 0.08);
+  color: #fae0b0;
+  border: 1px dashed rgba(233, 186, 117, 0.55);
+}
+
+/* Topbar navigation links & Overview return button */
+.ghost.nav-link {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.ghost.accent-ghost {
+  border-color: rgba(129, 229, 212, 0.42);
+  color: #cff9f1;
+  background: rgba(129, 229, 212, 0.10);
+}
+.ghost.accent-ghost:hover {
+  background: rgba(129, 229, 212, 0.20);
+  color: #ffffff;
+}
+
+/* Observatory Rail Scope Card & Agent Cloud Note */
+.scope-rail-card {
+  border-color: rgba(129, 229, 212, 0.32) !important;
+}
+.scope-mini p {
+  margin: 0 0 8px;
+  font-size: 12px;
+  line-height: 1.58;
+  color: var(--ink2);
+}
+.mini-mape {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6px 0 8px;
+  font-size: 11.5px;
+}
+.mini-mape th, .mini-mape td {
+  padding: 4px 6px;
+  border-bottom: 1px solid rgba(143, 208, 242, 0.16);
+  text-align: left;
+  color: var(--ink2);
+}
+.mini-mape th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 11px;
+}
+.mini-mape td:last-child, .mini-mape th:last-child {
+  text-align: right;
+  font-family: var(--mono);
+}
+.scope-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
+.scope-links a, .notes a {
+  color: #9be0ff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-size: 11.5px;
+}
+.scope-links a:hover, .notes a:hover {
+  color: #ffffff;
+}
+.agent-cloud-note {
+  margin-top: 10px;
+  padding: 6px 9px;
+  border-left: 2px solid rgba(229, 143, 192, 0.55);
+  background: rgba(229, 143, 192, 0.07);
+  border-radius: 0 6px 6px 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--ink2);
+}
+
+/* First-Screen Stage & Soft Left Vignette — keep 3D disc clear on the right! */
+.p2f-ui[hidden] { display: none !important; }
+body.p2f-mode:not(.p2f-child) .stage {
+  inset: -3vh -6vw -2vh 22vw !important;
+}
+.p2f-shade {
+  background:
+    linear-gradient(90deg, rgba(4, 11, 20, 0.78) 0%, rgba(4, 11, 20, 0.52) 27%, rgba(4, 11, 20, 0.06) 44%, transparent 62%),
+    linear-gradient(0deg, rgba(4, 11, 20, 0.45), transparent 20%, transparent 88%, rgba(4, 11, 20, 0.18)) !important;
+}
+
+/* Top-Right Buttons (33-Firm Observatory + GitHub only) */
+.p2f-topnav {
+  position: absolute;
+  right: clamp(28px, 3.2vw, 52px);
+  top: clamp(22px, 4vh, 42px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+  z-index: 5;
+}
+.p2f-navbtn {
+  padding: 7px 13px;
+  border-radius: 7px;
+  border: 1px solid rgba(155, 214, 244, 0.28);
+  background: rgba(12, 28, 46, 0.42);
+  backdrop-filter: blur(8px);
+  color: #eaf5fc;
+  font: 500 12px/1.2 var(--body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.18s;
+}
+.p2f-navbtn:hover {
+  border-color: rgba(155, 235, 246, 0.68);
+  color: #ffffff;
+  background: rgba(24, 56, 84, 0.62);
+}
+.p2f-navbtn.primary-nav {
+  border-color: rgba(129, 229, 212, 0.55);
+  background: rgba(129, 229, 212, 0.16);
+  color: #ecfffb;
+}
+
+/* Right-Side 01 / 02 / 03 Component Tabs — Strictly Left-Aligned Plumb Line & Inset from Screen Edge! */
+.p2f-components {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: auto !important;
+  right: clamp(28px, 3.2vw, 52px) !important;
+  width: 214px !important;
+  pointer-events: none;
+}
+.p2f-component {
+  left: 0 !important;
+  right: 0 !important;
+  width: 214px !important;
+  box-sizing: border-box !important;
+  display: grid !important;
+  grid-template-columns: 24px 1fr !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px 13px !important;
+  border: 1px solid rgba(145, 200, 228, 0.14) !important;
+  border-left: 2px solid rgba(135, 206, 224, 0.48) !important;
+  border-radius: 0 7px 7px 0 !important;
+  background: rgba(10, 24, 39, 0.34) !important;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+.p2f-component:hover, .p2f-component.active {
+  border-left-color: #9bf0e6 !important;
+  background: rgba(38, 86, 110, 0.34) !important;
+  color: #ffffff !important;
+}
+.p2f-component .comp-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.p2f-component .name {
+  color: #eaf5fc !important;
+  font-weight: 500;
+}
+.p2f-component small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tall, Slender Left Column — Never Blocks Right 3D Scene; Light Airy Glass + Crisp Bright Text */
+.p2f-brand {
+  left: clamp(24px, 2.8vw, 44px) !important;
+  top: clamp(22px, 3.8vh, 38px) !important;
+}
+.p2f-overview {
+  left: clamp(24px, 2.8vw, 44px) !important;
+  top: clamp(58px, 7.6vh, 78px) !important;
+  bottom: 48px !important;
+  width: min(378px, 26.2vw) !important;
+  max-height: none !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+  padding-right: 6px;
+  pointer-events: auto;
+  scrollbar-width: thin;
+  text-shadow: 0 1px 6px rgba(2, 8, 16, 0.72);
+}
+.p2f-overview h1.p2f-rq-title {
+  margin: 8px 0 0 !important;
+  font-size: clamp(20px, 1.72vw, 25px) !important;
+  font-weight: 500 !important;
+  line-height: 1.34 !important;
+  letter-spacing: 0.01em !important;
+  color: #ffffff !important;
+}
+.p2f-scope-card {
+  margin-top: 12px;
+  padding: 14px 15px;
+  border: 1px solid rgba(168, 220, 248, 0.22);
+  border-left: 2px solid rgba(129, 229, 212, 0.62);
+  border-radius: 10px;
+  background: rgba(14, 32, 50, 0.24);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.p2f-scope-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.p2f-scope-lead {
+  margin: 0 !important;
+  font-size: 12.5px !important;
+  line-height: 1.6 !important;
+  color: #eef6fc !important;
+  letter-spacing: 0.01em !important;
+}
+.p2f-scope-lead b {
+  color: #ffffff;
+}
+.p2f-scope-lead a {
+  color: #9be2ff;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.p2f-results-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 2px;
+}
+.p2f-res-box {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(164, 214, 242, 0.18);
+  background: rgba(18, 40, 62, 0.22);
+}
+.p2f-res-head {
+  font: 600 11.5px/1.35 var(--mono);
+  color: #aef2e6;
+  margin-bottom: 6px;
+}
+.p2f-res-table {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 10px;
+  font-size: 12px;
+  color: #eaf4fb;
+}
+.p2f-res-table b {
+  font-family: var(--mono);
+  color: #ffffff;
+}
+.p2f-res-stat {
+  font-size: 14px;
+  color: #ffebb3;
+  margin: 3px 0 4px;
+}
+.p2f-res-foot {
+  margin-top: 4px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: #d6e7f5;
+}
+.p2f-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+.p2f-explore-btn {
+  padding: 9px 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(138, 236, 219, 0.68);
+  background: linear-gradient(135deg, rgba(129, 229, 212, 0.28), rgba(79, 183, 232, 0.22));
+  color: #ffffff;
+  font: 600 12.5px/1.2 var(--body);
+  cursor: pointer;
+  transition: 0.18s;
+}
+.p2f-explore-btn:hover {
+  background: linear-gradient(135deg, rgba(129, 229, 212, 0.42), rgba(79, 183, 232, 0.34));
+  border-color: #b4fff2;
+  transform: translateY(-1px);
+}
+.p2f-inline-link {
+  color: #b6e6ff;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.p2f-inline-link:hover {
+  color: #ffffff;
+}
+.p2f-hint {
+  margin-top: 10px !important;
+  color: #c5daea !important;
+}
+
+/* Detail Eyebrow Badge + Conceptual Order-Layer Disclaimer Banner */
+.p2f-eyebrow-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.p2f-order-banner {
+  margin-top: 12px;
+  padding: 9px 12px;
+  border-left: 3px solid #e9ba75;
+  border-radius: 0 7px 7px 0;
+  background: rgba(233, 186, 117, 0.12);
+  color: #f8ebd2;
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+.p2f-order-banner code {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #fff6de;
+}
+
+/* Global Typography & Contrast Floor >= 11px / 12px body */
+.brand-sub, .mode-tabs button small, .card h2, .card h2 small,
+.hud-eyebrow, .hud-sub, .hud-tag, .co-seg, .co-tag, .kv b small,
+.rel-list, .rel-list b, .rel-list small, .evlog b,
+.tl-meta, .tl-speed, .tl-speed select, .tl-date,
+.tour-head, .tour-foot button, .scene-note, .status-strip,
+.lab, .lab.seg, .lab.layer,
+.p2f-brand, .p2f-back, .p2f-eyebrow, .p2f-hint,
+.p2f-component .num, .p2f-component .name, .p2f-component small,
+.p2f-detail-sub, .p2f-stepcount, .p2f-ref, .p2f-disclaimer,
+.p2f-choice, .p2f-quad, .p2f-math summary, .p2f-math p, .p2f-range output, .p2f-asset,
+.p2f-play, .p2f-time, .p2f-footer,
+.mechanism-label, .mechanism-tick-label, .mechanism-origin-label, .mechanism-source-label,
+.mechanism-scene-note span, .mechanism-legend,
+.agent-float-label, .agent-float-label small, .agent-core-title, .agent-core-title small,
+.agent-quad-label strong, .agent-quad-label small, .agent-hero-stages, .agent-caption p,
+.if-head > span, .if-head > small, .if-label, .if-agent, .if-tick, .if-source, .if-center,
+.if-legend, .if-viewhint, .if-person small, .if-gates, .if-explain small, .if-explain p,
+.if-compare-title, .if-compare-title small, .if-branch-status, .if-timeline,
+.if-message-card small, .if-control-label, .if-reading, .if-phase-rail button, .if-story-line p,
+.xl-head > span, .xl-head small, .xl-asset-label, .xl-layer-label, .xl-legend,
+.xl-corner > span, .xl-corner small, .xl-hint, #xlLayers button, .xl-caption,
+.xl-control-label, .xl-control, .xl-help, .asset-view-caption {
+  font-size: 11px !important;
+}
+
+.notes, .kv, .evlog, .p2f-stepcard p, .p2f-inspector, .p2f-live,
+.if-person p, .if-message-card, .xl-live {
+  font-size: 12px !important;
+  line-height: 1.62 !important;
+}
+
+/* High-contrast readable text colors */
+.brand-sub, .mode-tabs button small, .card h2 small, .hud-tag, .co-seg,
+.rel-list small, .evlog b, .tl-meta, .tl-speed, .scene-note, .status-strip,
+.p2f-brand, .p2f-eyebrow, .p2f-component .num, .p2f-component small,
+.p2f-detail-sub, .p2f-stepcount, .p2f-ref, .p2f-disclaimer, .p2f-inspector,
+.p2f-inspector small, .p2f-live, .p2f-math p, .p2f-time, .p2f-footer,
+.mechanism-scene-note span, .mechanism-legend, .agent-caption p,
+.if-head > span, .if-head > small, .if-legend, .if-viewhint, .if-person small,
+.if-explain p, .if-reading, .if-story-line p, .xl-head > span, .xl-head small,
+.xl-legend, .xl-corner small, .xl-hint, .xl-caption, .xl-help {
+  color: #a8c0d4 !important;
+}
+
+@media (max-width: 1024px) {
+  body.p2f-mode:not(.p2f-child) .stage {
+    inset: -2vh -8vw -2vh 12vw !important;
+  }
+  .p2f-overview {
+    width: min(350px, 36vw) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  body.p2f-mode:not(.p2f-child) .stage {
+    inset: 30vh -14vw 4vh -14vw !important;
+  }
+  .p2f-overview {
+    width: auto !important;
+    left: 16px !important;
+    right: 16px !important;
+    top: 62px !important;
+    bottom: 148px !important;
+  }
+  .p2f-components {
+    left: 16px !important;
+    right: 16px !important;
+    top: auto !important;
+    bottom: 80px !important;
+    width: auto !important;
+  }
+  .p2f-component {
+    width: auto !important;
+    display: flex !important;
+  }
+  .p2f-topnav {
+    top: 16px;
+    right: 16px;
+  }
+  .p2f-navbtn {
+    padding: 5px 9px;
+    font-size: 11px;
+  }
+}
+</style>
+</head>
 <body>
 <div id="app">
   <header class="topbar">
@@ -787,17 +1230,19 @@ body.layer-presentation .p2f-footer{font-size:0}body.layer-presentation .p2f-foo
         <span class="brand-sub">LANJU WEI / MARKET OBSERVATORY</span>
       </div>
     </div>
-    <h1 class="page-title">Asset Universe<span class="title-sub">Three-Layer Market · Live Observatory</span></h1>
+    <h1 class="page-title">Asset Universe<span class="title-sub">Three-Layer Market Observatory <span class="data-badge real">REAL DATA · 33 firms, 2023–2026</span></span></h1>
     <nav class="mode-tabs" role="tablist" aria-label="Spatial Representation">
-      <button role="tab" data-mode="stacked" aria-selected="true">Stratified<small>STRATIFIED</small></button>
-      <button role="tab" data-mode="planet" aria-selected="false">Spherical<small>SPHERICAL</small></button>
-      <button role="tab" data-mode="hyper" aria-selected="false">Hyperbolic Relations<small>HYPERBOLIC</small></button>
+      <button role="tab" data-mode="stacked" aria-selected="true">Stratified<small>DEFAULT</small></button>
+      <button role="tab" data-mode="planet" aria-selected="false">Spherical<small>RADIAL AXES</small></button>
+      <button role="tab" data-mode="hyper" aria-selected="false">Hyperbolic (experimental)<small>DISPLAY ONLY</small></button>
     </nav>
     <div class="top-actions">
+      <button id="backToOverviewBtn" class="ghost accent-ghost" title="Return to Research Question &amp; Conceptual Modules">← Overview</button>
       <button id="tourBtn" class="ghost" aria-haspopup="dialog">Tour</button>
       <button id="spinBtn" class="ghost" aria-pressed="false">Auto Rotate</button>
       <button id="focusBtn" class="ghost" aria-pressed="false" title="Hide panels and focus on the model (I)">Focus</button>
       <button id="resetBtn" class="ghost">Reset</button>
+      <a class="ghost nav-link" href="https://github.com/weilanju/weilanju.github.io" target="_blank" rel="noopener" title="Source Code &amp; Data on GitHub">GitHub ↗</a>
       <button id="panelBtn" class="ghost only-mobile" aria-expanded="false">Panel</button>
     </div>
   </header>
@@ -807,7 +1252,7 @@ body.layer-presentation .p2f-footer{font-size:0}body.layer-presentation .p2f-foo
     <div class="labels" id="labels" aria-hidden="true"></div>
 
     <div class="hud">
-      <div class="hud-eyebrow">MARKET OBSERVATORY</div>
+      <div class="hud-eyebrow">MARKET OBSERVATORY <span class="data-badge real">REAL DATA · 33 firms, 2023–2026</span></div>
       <div class="hud-date" id="hudDate">—</div>
       <div class="hud-sub" id="hudSub">—</div>
       <div class="hud-tag"><i></i><span id="hudTag">Real-Market Playback · Non-Causal Inference</span></div>
@@ -824,18 +1269,44 @@ body.layer-presentation .p2f-footer{font-size:0}body.layer-presentation .p2f-foo
     </div>
 
     <aside class="rail" id="rail" aria-label="Control Panel">
+      <section class="card scope-rail-card">
+        <details open>
+          <summary>Scope &amp; 53-Firm Results</summary>
+          <div class="notes scope-mini">
+            <p><b>This observatory</b> replays <b>33 AI-infrastructure firms</b> (2023–2026, v3 pack: price, technical-value share, 37 disclosed links). It is <b>not</b> the 4-agent price-fitting run itself.</p>
+            <p><b>Formal experiments</b> use the <b>53-firm supply chain</b> (40 listed, 19 verified supply edges):</p>
+            <table class="mini-mape" aria-label="Four-Agent Price-Fitting Test MAPE">
+              <thead><tr><th>Model (frozen 2023–25 test half)</th><th>MAPE</th></tr></thead>
+              <tbody>
+                <tr><td>MA(7) rolling baseline</td><td>4.160%</td></tr>
+                <tr><td>Lagged LightGBM</td><td>2.331%</td></tr>
+                <tr><td><b>Four-Agent Fit</b> (public/channel/structure/learning)</td><td><b>2.323%</b></td></tr>
+                <tr><td><b>Public-Information-Only</b> baseline</td><td><b>2.316%</b></td></tr>
+              </tbody>
+            </table>
+            <p class="scope-Null">Channel &amp; structural signals add no gain over public news here (reported as a null). By contrast, an <b>event study</b> across 159 analyst actions on 12 tradable supply edges finds <b>+1.21%</b> next-day abnormal return (<i>p</i> = 0.004 vs. 500 degree-preserving random networks, driven by upgrades).</p>
+            <div class="scope-links">
+              <a href="https://github.com/weilanju/weilanju.github.io/tree/main/market-sim" target="_blank" rel="noopener">market-sim/ ↗</a>
+              <a href="https://github.com/weilanju/weilanju.github.io/tree/main/empirical" target="_blank" rel="noopener">empirical/ ↗</a>
+              <a href="https://github.com/weilanju/weilanju.github.io" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+          </div>
+        </details>
+      </section>
+
       <section class="card">
-        <h2>Layers <small id="layerMeta">3 Layers · 33 Companies</small></h2>
+        <h2><span>Layers <span class="data-badge real">REAL DATA · 33 firms, 2023–2026</span></span> <small id="layerMeta">3 Layers · 33 Companies</small></h2>
         <div class="pill-grid">
           <button class="pill info" data-layer="info" aria-pressed="true">Information</button>
           <button class="pill net" data-layer="relations" aria-pressed="true">Relations</button>
           <button class="pill price" data-layer="priceSurface" aria-pressed="true">Price Surface</button>
           <button class="pill value" data-layer="valueSurface" aria-pressed="true">Value Surface</button>
-          <button class="pill agents" data-layer="agents" aria-pressed="true">Agent</button>
+          <button class="pill agents" data-layer="agents" aria-pressed="true" title="Illustrative agent cloud (Basket / Global / Local, 116 points) — display only">Agent (cloud)</button>
           <button class="pill" data-layer="core" aria-pressed="true">Demand Source</button>
           <button class="pill" data-layer="labels" aria-pressed="true">Labels</button>
           <button class="pill" data-layer="axes" aria-pressed="true">Price Axes</button>
         </div>
+        <p class="agent-cloud-note">Agent layer: <b>illustrative agent cloud — display only</b> (116 Basket / Global / Local markers; does not drive prices).</p>
         <div class="ctl" style="margin-top:12px">
           <label for="gain">Display Gain <input id="gain" type="range" min="8" max="45" value="22"><b id="gainOut">0.22</b></label>
         </div>
@@ -852,7 +1323,7 @@ body.layer-presentation .p2f-footer{font-size:0}body.layer-presentation .p2f-foo
       </section>
 
       <section class="card">
-        <h2>Selected Company <small id="selMeta">All Assets</small></h2>
+        <h2><span>Selected Company <span class="data-badge real">REAL DATA</span></span> <small id="selMeta">All Assets</small></h2>
         <select id="companySelect" aria-label="Select Company"></select>
         <div class="co-head">
           <div>
@@ -873,7 +1344,7 @@ body.layer-presentation .p2f-footer{font-size:0}body.layer-presentation .p2f-foo
       </section>
 
       <section class="card">
-        <h2>Events <small id="eventMeta">Latest Available</small></h2>
+        <h2><span>Events <span class="data-badge real">REAL DATA</span></span> <small id="eventMeta">Latest Available</small></h2>
         <div class="evlog" id="eventLog"></div>
       </section>
 
@@ -884,8 +1355,10 @@ body.layer-presentation .p2f-footer{font-size:0}body.layer-presentation .p2f-foo
             <ul>
               <li><b>Visual</b>: The starfield and outer scale marks are visual references only. Surface lights sample the existing interpolation grid; they add neither companies nor market observations. The Focus button / I key hides panels; all original layers and playback rules are retained.</li>
               <li><b>Controls</b>: Drag to rotate · Scroll to zoom · Click a company for three-layer readings · Space to play/pause · ← → step one day · 1/2/3 switch spaces · F restore view · H open panel. “Start 6-Step Tour” at lower left explains the sequence.</li>
-              <li><b>References</b>: Based on Financial Market Simulation System Design Handbook v1.2: §03 three-layer space, §04 fixed anchors and price axes, §05 composite relation channels, §08/§10 information interfaces and time, and §15 geometric representation. Visuals and data come from the companion works How Price and Value Align, Value–Price Planet, Spatial Dynamics Observatory, Asset Universe, and Financial Information Ecosystem.</li>
-              <li><b>Data</b>: 33 AI infrastructure companies, 2023-01-03 — 2026-10-13 (948 trading days), from the embedded payload in the reference page Value–Price Planet: market-cap shares update daily and technical-value shares quarterly.</li>
+              <li><b>Value Definition</b>: Value here = <b>technical-value share</b> (quarterly technical indicators in the v3 data pack); the <code>market-sim/</code> experiment uses a static <b>bottleneck-position proxy</b> (downstream reach × low substitutability × edge scarcity) instead.</li>
+              <li><b>Order Layer Absent by Design</b>: Realized prices here and in <code>market-sim/</code> are exogenous. An order-book / matching module is specified conceptually in the Design Handbook — not implemented, not run, and no result in this portfolio depends on it.</li>
+              <li><b>References</b>: Based on <a href="https://github.com/weilanju/weilanju.github.io/blob/main/docs/design_handbook_v1.2.1_English.pdf" target="_blank" rel="noopener">Financial Market Simulation System Design Handbook v1.2.1</a> (v1.2 series): §03 three-layer space, §04 fixed anchors and price axes, §05 composite relation channels, §08/§10 information interfaces and time, and §15 geometric representation.</li>
+              <li><b>Data</b>: 33 AI infrastructure companies, 2023-01-03 — 2026-10-13 (948 trading days, v3 data pack): market-cap shares update daily and technical-value shares quarterly. For the 53-firm supply-chain experiments, see <a href="https://github.com/weilanju/weilanju.github.io/tree/main/market-sim" target="_blank" rel="noopener">market-sim/</a> and <a href="https://github.com/weilanju/weilanju.github.io/tree/main/empirical" target="_blank" rel="noopener">empirical/</a>.</li>
               <li><b>Height</b>: r = 1 + gain · ln(share × N); a share of 1/N lies on the base surface. Sliders change display only, not values.</li>
               <li><b>Two Surfaces</b>: Gaussian-kernel interpolation between company nodes is for spatial display only; it is neither a tradable price nor a quote between observed times.</li>
               <li><b>Information</b>: Public news illuminates nodes simultaneously and decays by similarity, without ripples spreading from the source. Only channel information—such as a relationship itself becoming news—travels along relation edges. Animation speed is not an empirical time lag.</li>
@@ -2875,7 +3348,7 @@ const UI = (() => {
   let labelSeen = new Set();
   let sparkSeries = null, sparkIdx = -1;
   let tourIdx = -1, tourOn = false;
-  const MODE_LABEL = { stacked: 'Stratified · v1.2 Display Specification', planet: 'Spherical · Radial Price Axes', hyper: 'Hyperbolic Relations · Display Only' };
+  const MODE_LABEL = { stacked: 'Stratified · v1.2.1 Display Specification', planet: 'Spherical · Radial Price Axes', hyper: 'Hyperbolic (experimental) · Display Only' };
 
   /* ---------- 初始化 ---------- */
   function init(app) {
@@ -3068,8 +3541,10 @@ const UI = (() => {
       const b = document.createElement('b');
       b.textContent = DATA.dates[e.d].slice(5);
       const sp = document.createElement('span');
+      const kindLabel = ({ 'Earnings': 'Earnings', 'Macro': 'Macro', 'Announcement': 'Announcement', 'Other': 'Other' })[DATA.kindKey(e)] || 'Other';
       const tt = (e.src && DATA.index[e.src] != null) ? e.src : 'Market-wide';
-      sp.textContent = `${({ 'Earnings': 'Earnings', 'Macro': 'Macro', 'Announcement': 'Announcement', 'Other': 'Other' })[DATA.kindKey(e)] || 'Other'} · ${tt} · ${e.h}`;
+      sp.textContent = `${kindLabel} · ${tt}`;
+      row.title = e.h ? `${DATA.dates[e.d]} · ${kindLabel} · ${tt} — ${e.h}` : `${DATA.dates[e.d]} · ${kindLabel} · ${tt}`;
       row.appendChild(b); row.appendChild(sp);
       el.eventLog.appendChild(row);
     }
@@ -3234,7 +3709,7 @@ const UI = (() => {
     },
     {
       title: 'Basket Flows: Follow, Then Reverse',
-      body: 'Cyan represents basket/ETF flows: they follow members on basket-company earnings days, then mean-revert over 1–5 days. This was the only mechanism in the first minimal simulation to reproduce both spillover-reversal within baskets and no reversal within segments. Agents do not drive prices.',
+      body: 'Illustrative agent cloud — display only (116 Basket, Global, and Local markers). Cyan markers illustrate basket/ETF attention on earnings days followed by 1–5 day mean reversion; this visual cloud does not drive prices. The formal market-sim experiment tests four information-access types (public, channel, structure, learning).',
       apply() {
         let found = null;
         for (const e of DATA.events) {
@@ -3581,7 +4056,7 @@ const App = (() => {
     orbitTo(world.cameraPreset());
     UI.onWorldChanged();
     UI.modeChanged();
-    UI.toast('Space: ' + ({ stacked: 'Stratified (v1.2 Display Specification)', planet: 'Spherical (Radial Price Axes)', hyper: 'Hyperbolic Relations (Display Only)' })[mode]);
+    UI.toast('Space: ' + ({ stacked: 'Stratified (v1.2.1 Display Specification)', planet: 'Spherical (Radial Price Axes)', hyper: 'Hyperbolic (experimental · Display Only)' })[mode]);
     renderOnce();
   }
   function select(i) {
@@ -3821,12 +4296,45 @@ body.p2f-mode{overflow:hidden;background:#030912}.p2f-mode .stage{position:fixed
 <div class="mechanism-legend" id="mechanismLegend"><span><i style="--c:#edc486"></i>Assets / Technical Indicators</span><span><i style="--c:#87d7f3"></i>Price / Price Axis</span><span><i style="--c:#a99cf4"></i>Information State</span></div>
 <div class="mechanism-scene-note" id="mechanismNote"><b></b><span></span></div>
 <div class="p2f-ui" id="p2fUI">
- <div class="p2f-shade"></div><div class="p2f-brand"><i>◈</i><span>ASSET UNIVERSE / MARKET OBSERVATORY</span></div><div class="p2f-number">02 / PRICE COMPONENTS</div>
+ <div class="p2f-shade"></div><div class="p2f-brand"><i>◈</i><span>LANJU WEI · ASSET UNIVERSE OBSERVATORY</span></div>
+ <div class="p2f-topnav" aria-label="Observatory Links">
+   <button class="p2f-navbtn primary-nav" id="enterObservatoryTop" type="button">33-Firm Observatory →</button>
+   <a class="p2f-navbtn" href="https://github.com/weilanju/weilanju.github.io" target="_blank" rel="noopener">GitHub ↗</a>
+ </div>
  <button class="p2f-back" id="p2fBack" aria-label="Return to the current page overview">← <span>Overview</span></button>
- <main class="p2f-overview" id="p2fOverview"><div class="p2f-eyebrow">DECOMPOSING PRICE FORMATION</div><h1>How Do We<br>Decompose Price?</h1><p>Without leaving the global model, decompose price formation into three independently observable components.</p><div class="p2f-hint"><i></i><span>Click a term on the right to enter a component</span></div></main>
- <svg class="p2f-callouts" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true"><g data-line="asset"><path d="M1320 305 C1190 305 1130 220 970 235"/><circle cx="970" cy="235" r="3"/></g><g data-line="agent"><path d="M1320 440 C1170 440 1090 470 915 480"/><circle cx="915" cy="480" r="3"/></g><g data-line="info"><path d="M1320 575 C1180 575 1110 640 950 650"/><circle cx="950" cy="650" r="3"/></g></svg>
- <div class="p2f-components" aria-label="Component Switcher"><button class="p2f-component" data-section="asset"><span class="num">01</span><span><span class="name">Asset Grid</span><small>ASSET GRID</small></span></button><button class="p2f-component" data-section="agent"><span class="num">02</span><span><span class="name">Agent</span><small>MARKET AGENTS</small></span></button><button class="p2f-component" data-section="info"><span class="num">03</span><span><span class="name">Information</span><small>INFORMATION</small></span></button></div>
- <section class="p2f-detail" id="p2fDetail" aria-hidden="true"><div class="p2f-eyebrow" id="p2fDetailEyebrow"></div><h1 id="p2fDetailTitle"></h1><p class="p2f-detail-sub" id="p2fDetailSub"></p><div class="p2f-stepcard"><span class="p2f-stepcount" id="p2fStepCount"></span><h2 id="p2fStepTitle"></h2><p id="p2fStepBody"></p><div class="p2f-refs" id="p2fRefs"></div><div class="p2f-disclaimer">Simulated Data / Candidate Mechanisms · Not Empirical Results</div></div><div class="p2f-inspector" id="p2fInspector"></div><div class="p2f-live" id="p2fLive"></div></section>
+ <main class="p2f-overview" id="p2fOverview">
+   <div class="p2f-eyebrow">RESEARCH QUESTION &amp; OBSERVATORY GUIDE</div>
+   <h1 class="p2f-rq-title">How Does Information Travel Through Economic Networks and Get Priced In?</h1>
+   <div class="p2f-scope-card" role="region" aria-label="Observatory Scope and Core Empirical Results">
+     <div class="p2f-scope-row">
+       <span class="data-badge real">REAL DATA · 33 firms, 2023–2026</span>
+       <span class="data-badge sim">SIMULATED EXAMPLE · 01–03</span>
+     </div>
+     <p class="p2f-scope-lead"><b>What this page is:</b> Interactive 3-layer observatory of <b>33 AI-infrastructure firms</b> (price, technical-value share, and 37 disclosed relations over 948 trading days, v3 pack), plus three conceptual mechanism modules on the right.</p>
+     <p class="p2f-scope-lead p2f-scope-gap"><b>What it is not:</b> Not the 4-agent price-fitting run itself — formal experiments use the <b>53-firm supply chain</b> (40 listed, 19 verified supply edges) in <a href="https://github.com/weilanju/weilanju.github.io/tree/main/market-sim" target="_blank" rel="noopener">market-sim/ ↗</a> and <a href="https://github.com/weilanju/weilanju.github.io/tree/main/empirical" target="_blank" rel="noopener">empirical/ ↗</a>.</p>
+     <div class="p2f-results-grid">
+       <div class="p2f-res-box">
+         <div class="p2f-res-head">4-Agent Simulation · 53 Firms (Test MAPE)</div>
+         <div class="p2f-res-table">
+           <span>MA(7) rolling baseline</span><b>4.160%</b>
+           <span>Lagged LightGBM</span><b>2.331%</b>
+           <span>Four-Agent Fit</span><b>2.323%</b>
+           <span>Public-News-Only baseline</span><b>2.316%</b>
+         </div>
+         <div class="p2f-res-foot">Null gain beyond public news under frozen protocol.</div>
+       </div>
+       <div class="p2f-res-box">
+         <div class="p2f-res-head">Supply-Chain Event Study · 12 Tradable Edges</div>
+         <div class="p2f-res-stat"><b>+1.21%</b> next-day signed AR</div>
+         <div class="p2f-res-foot">159 analyst actions (<i>t</i> = 2.50, BH <i>q</i> = 0.027); permutation <b><i>p</i> = 0.004</b> vs. 500 degree-matched random graphs; driven by upgrades (+1.15 pp).</div>
+       </div>
+     </div>
+   </div>
+   <div class="p2f-hint"><i></i><span>Click 01–03 on the right to inspect conceptual mechanisms</span></div>
+ </main>
+ <svg class="p2f-callouts" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true"><g data-line="asset"><path d="M1195 305 C1115 305 1075 235 985 245"/><circle cx="985" cy="245" r="3"/></g><g data-line="agent"><path d="M1195 440 C1110 440 1055 468 945 478"/><circle cx="945" cy="478" r="3"/></g><g data-line="info"><path d="M1195 575 C1115 575 1065 635 975 645"/><circle cx="975" cy="645" r="3"/></g></svg>
+ <div class="p2f-components" aria-label="Component Switcher"><button class="p2f-component" data-section="asset"><span class="num">01</span><span class="comp-text"><span class="name">Asset Grid</span><small>SIMULATED EXAMPLE</small></span></button><button class="p2f-component" data-section="agent"><span class="num">02</span><span class="comp-text"><span class="name">Agent</span><small>CONCEPTUAL DESIGN</small></span></button><button class="p2f-component" data-section="info"><span class="num">03</span><span class="comp-text"><span class="name">Information</span><small>SIMULATED + 33-FIRM</small></span></button></div>
+ <section class="p2f-detail" id="p2fDetail" aria-hidden="true"><div class="p2f-eyebrow-row"><div class="p2f-eyebrow" id="p2fDetailEyebrow"></div><span class="data-badge sim" id="p2fDataBadge">SIMULATED EXAMPLE · not market data</span></div><h1 id="p2fDetailTitle"></h1><p class="p2f-detail-sub" id="p2fDetailSub"></p><div class="p2f-order-banner" id="p2fOrderBanner" hidden></div><div class="p2f-stepcard"><span class="p2f-stepcount" id="p2fStepCount"></span><h2 id="p2fStepTitle"></h2><p id="p2fStepBody"></p><div class="p2f-refs" id="p2fRefs"></div><div class="p2f-disclaimer" id="p2fDisclaimer">Simulated Example / Candidate Mechanisms · Not Market Data</div></div><div class="p2f-inspector" id="p2fInspector"></div><div class="p2f-live" id="p2fLive"></div></section>
  <div class="p2f-steps" id="p2fSteps" aria-label="Progressive Component Explanation"></div>
  <div class="p2f-playbar" id="p2fPlaybar"><button class="p2f-play icon primary" id="p2fPlay" aria-label="Play or Pause">▶</button><button class="p2f-play" id="p2fOnce">Step</button><button class="p2f-play" id="p2fReplay">Replay</button><span class="p2f-time" id="p2fTime"></span><span class="p2f-divider"></span><button class="p2f-play" id="p2fReset">Reset View</button></div>
  <div class="p2f-footer">SIMULATED MECHANISMS / SHARED ASSETS A—H</div><div class="p2f-tools"><button class="p2f-tool" id="p2fSound" aria-label="Enable Sound" aria-pressed="false">♪</button><button class="p2f-tool" id="p2fFullscreen" aria-label="Fullscreen">⛶</button></div>
@@ -3870,7 +4378,7 @@ const InformationWorld=(()=>{
     const feedback=.18*(prices[i]-100),q=[agents[i*2],agents[i*2+1]].map(a=>{const v=clamp(100+a.belief+feedback,30,180),account=accounts[a.id],hold=p.story&&a.id===2;return{id:a.id,bid:v-.25,ask:v+.25,buyQty:hold?0:Math.min(3,Math.floor(account.cash/(v-.25))),sellQty:hold?0:Math.min(3,account.shares)}});
     if(p.trading&&(!p.story||(t>=7&&i<2))){const hi=q[0].bid>=q[1].bid?q[0]:q[1],lo=hi===q[0]?q[1]:q[0];if(hi.bid>=lo.ask){const qty=Math.min(hi.buyQty,lo.sellQty);if(qty>0){const price=(hi.bid+lo.ask)/2,buyer=accounts[hi.id],seller=accounts[lo.id];buyer.cash-=price*qty;seller.cash+=price*qty;buyer.shares+=qty;seller.shares-=qty;prices[i]=price;const trade={t,asset:i,price,qty,buyer:hi.id,seller:lo.id};batch.push(trade);trades.push(trade)}}}return q;
    })}
-   for(const a of agents){const traded=batch.find(tr=>tr.buyer===a.id||tr.seller===a.id);if(traded)a.status=a.interpreted?(traded.buyer===a.id?'Buy Order Executed':'Sell Order Executed'):(a.available?'Unnoticed · Existing Quote Executed':'No Message · Existing Quote Executed');else if(a.interpreted)a.status=p.trading?'Quoted · Awaiting Execution':'Judgment Complete · Trading Closed';if(p.story&&a.id===2&&a.noticed&&!traded)a.status='Noticed · Waiting';a.cash=accounts[a.id].cash;a.shares=accounts[a.id].shares}
+   for(const a of agents){const traded=batch.find(tr=>tr.buyer===a.id||tr.seller===a.id);if(traded)a.status=a.interpreted?(traded.buyer===a.id?'Buy Order · Illustrative fill':'Sell Order · Illustrative fill'):(a.available?'Unnoticed · Prior Quote Illustrative fill':'No Message · Prior Quote Illustrative fill');else if(a.interpreted)a.status=p.trading?'Quoted · Awaiting Illustrative fill':'Judgment Complete · Trading Closed';if(p.story&&a.id===2&&a.noticed&&!traded)a.status='Noticed · Waiting';a.cash=accounts[a.id].cash;a.shares=accounts[a.id].shares}
    frames.push(frame(t,agents,batch));
   }
   return{params:p,frames,trades,accounts,at(t){return frames[clamp(Math.floor(t/dt+1e-8),0,frames.length-1)]}};
@@ -3881,7 +4389,7 @@ if(typeof module!=='undefined')module.exports=InformationWorld;
 
 function createInformationStudioLegacy(callbacks={}){
  const M=InformationWorld,T=THREE,V=T.Vector3,$=id=>document.getElementById(id),A=M.assets;
- const root=document.createElement('section');root.id='informationStudio';root.innerHTML='<div class="if-head"><span>ONE MESSAGE / ONE MARKET</span><b id="ifTopic">M-01 · A May Achieve a Technical Breakthrough</b><small id="ifContext">Technical forecast has not changed the underlying structure</small></div><div class="if-viewport"><canvas id="ifCanvas" aria-label="Information environment, asset grid, agents, and price axes"></canvas><div id="ifLabels"></div><div class="if-legend"><span><i class="if-violet"></i>Information State</span><span><i class="if-gold"></i>Technology / Relations</span><span><i class="if-blue"></i>Execution Price</span><span><i class="if-mint"></i>Agent</span></div><div class="if-viewhint">Drag to Rotate · Scroll to Zoom · Click an Asset</div></div><div class="if-bottom" id="ifBottom"></div><div class="if-timeline"><span id="ifClock">0.0 s</span><input id="ifScrub" type="range" min="0" max="24" step="0.05" value="0" aria-label="Information Story Timeline"><span>24 s</span></div>';
+ const root=document.createElement('section');root.id='informationStudio';root.innerHTML='<div class="if-head"><span>ONE MESSAGE / ONE MARKET</span><b id="ifTopic">M-01 · A May Achieve a Technical Breakthrough</b><small id="ifContext">Technical forecast has not changed the underlying structure</small></div><div class="if-viewport"><canvas id="ifCanvas" aria-label="Information environment, asset grid, agents, and price axes"></canvas><div id="ifLabels"></div><div class="if-legend"><span><i class="if-violet"></i>Information State</span><span><i class="if-gold"></i>Technology / Relations</span><span><i class="if-blue"></i>Illustrative Fill Price</span><span><i class="if-mint"></i>Agent</span></div><div class="if-viewhint">Drag to Rotate · Scroll to Zoom · Click an Asset</div></div><div class="if-bottom" id="ifBottom"></div><div class="if-timeline"><span id="ifClock">0.0 s</span><input id="ifScrub" type="range" min="0" max="24" step="0.05" value="0" aria-label="Information Story Timeline"><span>24 s</span></div>';
  document.body.append(root);$('ifScrub').oninput=e=>callbacks.onSeek?.(+e.target.value);
  const canvas=$('ifCanvas'),labels=$('ifLabels'),renderer=new T.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));
  const scene=new T.Scene(),world=new T.Group(),camera=new T.PerspectiveCamera(36,1,.1,80);scene.add(world);scene.add(new T.AmbientLight(0xbad9e8,1.4));const light=new T.DirectionalLight(0xb9f6e4,2);light.position.set(4,6,8);scene.add(light);
@@ -5857,7 +6365,7 @@ return changed;}};
 
 function createLayerPresentation(callbacks={}){
  const T=THREE,E=ExtractedLayerWorld,D=E.DATA,$=id=>document.getElementById(id),clamp=(x,a,b)=>Math.max(a,Math.min(b,x)),smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)};
- const root=document.createElement('section');root.id='extractedLayers';root.innerHTML=`<div class="xl-head"><span id="xlEyebrow">02 / STRATIFIED VIEW</span><b id="xlTitle">One Asset, Connected Through Every Layer.</b><small>Original Visual Elements · Continuous Display</small></div><div class="xl-viewport"><canvas id="xlCanvas" aria-label="Information mapping layer, price/value surfaces, and asset grid"></canvas><div id="xlLabels"></div><div class="xl-legend"><span style="--c:#edd685">Information Mapping</span><span style="--c:#65caff">Price</span><span style="--c:#e5ad64">Value</span><span style="--c:#a3b8df">Asset Grid</span></div><div class="xl-corner"><span id="xlDate"></span><small>Embedded Sequence Replay · Not Live Market Data</small></div><div class="xl-hint" id="xlHint">Drag to Rotate · Scroll to Zoom · Click an Asset Axis</div></div><div class="xl-footer"><div id="xlLayers"><button data-depth="0"><i></i>Information Mapping</button><span>→</span><button data-depth=".47"><i></i>Price × Value</button><span>→</span><button data-depth="1"><i></i>Asset Grid</button></div><div class="xl-caption" id="xlCaption"></div></div>`;document.body.append(root);
+ const root=document.createElement('section');root.id='extractedLayers';root.innerHTML=`<div class="xl-head"><span id="xlEyebrow">02 / STRATIFIED VIEW · REAL DATA (33 FIRMS, 2023–2026)</span><b id="xlTitle">One Asset, Connected Through Every Layer.</b><small>33 AI-Infrastructure Firms · Market-Cap &amp; Technical-Value Shares</small></div><div class="xl-viewport"><canvas id="xlCanvas" aria-label="Information mapping layer, price/value surfaces, and asset grid"></canvas><div id="xlLabels"></div><div class="xl-legend"><span style="--c:#edd685">Information Mapping</span><span style="--c:#65caff">Price</span><span style="--c:#e5ad64">Value</span><span style="--c:#a3b8df">Asset Grid</span></div><div class="xl-corner"><span id="xlDate"></span><small>Embedded Sequence Replay · Not Live Market Data</small></div><div class="xl-hint" id="xlHint">Drag to Rotate · Scroll to Zoom · Click an Asset Axis</div></div><div class="xl-footer"><div id="xlLayers"><button data-depth="0"><i></i>Information Mapping</button><span>→</span><button data-depth=".47"><i></i>Price × Value</button><span>→</span><button data-depth="1"><i></i>Asset Grid</button></div><div class="xl-caption" id="xlCaption"></div></div>`;document.body.append(root);
  const canvas=$('xlCanvas'),viewport=canvas.parentNode,renderer=new T.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setClearColor(0x050d14,0);renderer.outputColorSpace=T.SRGBColorSpace;
  const scene=new T.Scene(),camera=new T.PerspectiveCamera(38,1,.05,90);scene.add(new T.AmbientLight(0x9cd8ff,1.5));const light=new T.DirectionalLight(0xd6e9ff,1.2);light.position.set(3,5,6);scene.add(light);E.setCamera(camera);
  const flat=E.W.buildFlat('stacked'),sphere=E.W.buildPlanet();scene.add(flat.group,sphere.group);sphere.group.visible=false;
@@ -5934,7 +6442,7 @@ function createInformationStudio(callbacks={}){
  const C={blue:0x79d4f2,gold:0xe4bc79,yellow:0xf0d889,mint:0x7fd3c3,violet:0xaa9de0,muted:0x416276};
  const root=document.createElement('section');root.id='informationStudio';root.dataset.page='0';root.innerHTML=`<style>
  #informationStudio[data-page="0"]{grid-template-rows:60px minmax(0,1fr) 128px 28px}.if-story{height:100%;display:grid;grid-template-rows:25px 34px minmax(0,1fr);gap:5px;padding:0 5px}.if-phase-rail{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;pointer-events:auto}.if-phase-rail button{position:relative;border:0;border-top:1px solid #496a7c44;background:none;color:#547386;font:8px inherit;letter-spacing:.04em;padding:7px 2px 0;cursor:pointer;text-align:left;transition:color .25s,border-color .25s}.if-phase-rail button:before{content:'';position:absolute;left:0;top:-1px;width:0;height:1px;background:#e1cb8c;transition:width .35s}.if-phase-rail button.done{color:#829ca8}.if-phase-rail button.done:before,.if-phase-rail button.active:before{width:100%}.if-phase-rail button.active{color:#ead69e;border-top-color:#c7ac6555}.if-story-line{display:flex;align-items:baseline;gap:10px;min-width:0;padding:0 2px}.if-story-line b{font-size:11px;font-weight:400;color:#c7dce3;white-space:nowrap}.if-story-line p{margin:0;color:#6e8e9e;font-size:9px;line-height:1.6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.if-story .if-receipts{grid-template-columns:repeat(4,1fr);gap:7px}.if-story .if-person{padding:6px 9px}.if-story .if-person p{margin:4px 0;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.if-story .if-person small{font-size:8px}.if-story .if-gates{font-size:7px}.if-layer-tag{color:#d8c98e;border-color:#d8c98e44}.if-value-label{color:#e4bc79}.if-order-label{color:#8ed9ee;border:none;background:transparent;font-size:8px}.if-feedback-label{color:#e8d38f;border-color:#cbb36c44}.if-yellow{background:#f0d889}@media(max-height:780px) and (min-width:601px){#informationStudio[data-page="0"]{grid-template-rows:51px minmax(0,1fr) 112px 24px}.if-story{grid-template-rows:22px 27px minmax(0,1fr);gap:3px}.if-story .if-person p{margin:2px 0}.if-story-line p{font-size:8px}}@media(max-width:600px){#informationStudio[data-page="0"]{grid-template-rows:38px minmax(0,1fr) 94px 19px}.if-story{grid-template-rows:20px 23px minmax(0,1fr);gap:2px;padding:0 9px}.if-phase-rail{gap:3px}.if-phase-rail button{font-size:6px;padding-top:5px}.if-story-line{gap:5px}.if-story-line b{font-size:8px}.if-story-line p{font-size:6px}.if-story .if-receipts{gap:3px}.if-story .if-person{padding:4px}.if-story .if-person p,.if-story .if-gates{display:none}.if-story .if-person b{font-size:7px}.if-story .if-person small{font-size:5px}.if-story .if-person>div:first-child{display:block}.if-layer-tag{font-size:6px!important}}
- </style><div class="if-head"><span>FROM INFORMATION TO PRICE / LOCAL OBSERVATION</span><b id="ifTopic">M-01 · A May Achieve a Technical Breakthrough</b><small id="ifContext">Two assets · four agents · one information environment</small></div><div class="if-viewport"><canvas id="ifCanvas" aria-label="How a Message Enters Price Through Agent Judgment and Real Execution"></canvas><div id="ifLabels"></div><div class="if-legend"><span><i class="if-yellow"></i>Information Mapping</span><span><i class="if-blue"></i>Price / Orders</span><span><i class="if-gold"></i>Technology / Relations</span><span><i class="if-mint"></i>Agent</span></div><div class="if-viewhint">Drag to Rotate · Scroll to Zoom · Click an Asset</div></div><div class="if-bottom" id="ifBottom"><div class="if-story"><div class="if-phase-rail">${['01 Message Appears','02 Agent Reactions','03 Trading Forms Price','04 Technical Outcome'].map((x,i)=>`<button data-story-seek="${[0,3,7,12][i]}">${x}</button>`).join('')}</div><div class="if-story-line"><b id="ifStageTitle"></b><p id="ifStageBody"></p></div><div class="if-receipts">${[[0,'A·α','Notice and Judge'],[1,'A·β','Unnoticed'],[2,'B·α','Notice but Wait'],[3,'B·β','Unnoticed · Counterparty']].map(([id,name,role])=>`<div class="if-person" data-person="${id}"><div><b>${name}</b><small>${role}</small></div><p>Awaiting Message</p><div class="if-gates"><span>Available</span><span>Attend</span><span>Judge</span></div></div>`).join('')}</div></div></div><div class="if-timeline"><span id="ifClock">0.0 s</span><input id="ifScrub" type="range" min="0" max="24" step="0.05" value="0" aria-label="Information Story Timeline"><span>24 s</span></div>`;
+ </style><div class="if-head"><span>FROM INFORMATION TO PRICE · SIMULATED EXAMPLE (NOT MARKET DATA)</span><b id="ifTopic">M-01 · A May Achieve a Technical Breakthrough</b><small id="ifContext">Two synthetic assets · four agents · conceptual matching illustration</small></div><div class="if-viewport"><canvas id="ifCanvas" aria-label="How a Message Enters Price Through Agent Judgment and Real Execution"></canvas><div id="ifLabels"></div><div class="if-legend"><span><i class="if-yellow"></i>Information Mapping</span><span><i class="if-blue"></i>Price / Orders</span><span><i class="if-gold"></i>Technology / Relations</span><span><i class="if-mint"></i>Agent</span></div><div class="if-viewhint">Drag to Rotate · Scroll to Zoom · Click an Asset</div></div><div class="if-bottom" id="ifBottom"><div class="if-story"><div class="if-phase-rail">${['01 Message Appears','02 Agent Reactions','03 Trading Forms Price','04 Technical Outcome'].map((x,i)=>`<button data-story-seek="${[0,3,7,12][i]}">${x}</button>`).join('')}</div><div class="if-story-line"><b id="ifStageTitle"></b><p id="ifStageBody"></p></div><div class="if-receipts">${[[0,'A·α','Notice and Judge'],[1,'A·β','Unnoticed'],[2,'B·α','Notice but Wait'],[3,'B·β','Unnoticed · Counterparty']].map(([id,name,role])=>`<div class="if-person" data-person="${id}"><div><b>${name}</b><small>${role}</small></div><p>Awaiting Message</p><div class="if-gates"><span>Available</span><span>Attend</span><span>Judge</span></div></div>`).join('')}</div></div></div><div class="if-timeline"><span id="ifClock">0.0 s</span><input id="ifScrub" type="range" min="0" max="24" step="0.05" value="0" aria-label="Information Story Timeline"><span>24 s</span></div>`;
  document.body.append(root);$('ifScrub').oninput=e=>callbacks.onSeek?.(+e.target.value);root.querySelectorAll('[data-story-seek]').forEach(b=>b.onclick=()=>callbacks.onSeek?.(+b.dataset.storySeek));
  const canvas=$('ifCanvas'),labels=$('ifLabels'),renderer=new T.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.setClearColor(0x000000,0);
  const scene=new T.Scene(),world=new T.Group(),camera=new T.PerspectiveCamera(35,1,.1,80);scene.add(world);scene.add(new T.AmbientLight(0xa9c9dc,1.35));const keyLight=new T.DirectionalLight(0xc8f3e8,1.8);keyLight.position.set(-3,6,7);scene.add(keyLight);const warmLight=new T.DirectionalLight(0xe9c17e,.6);warmLight.position.set(4,1,3);scene.add(warmLight);
@@ -6246,7 +6754,7 @@ function createAgentStage(callbacks){
  overlay.innerHTML='<div class="agent-floats"></div><div class="agent-quadrants" hidden><div class="agent-axis-v"></div><div class="agent-axis-h"></div><span class="agent-col-title left">Free</span><span class="agent-col-title right">Non-Free</span><span class="agent-row-title top">Local Interests</span><span class="agent-row-title bottom">Non-Local Interests</span>'+M.types.map((t,i)=>`<button class="agent-quad-label q${i}" data-agent-type="${i}" style="--c:${t.color}"><i></i><strong>${t.name}</strong><small>${i<2?'LOCAL':'NON-LOCAL'} · ${i%2?'NON-FREE':'FREE'}</small></button>`).join('')+'</div><div class="agent-hero-stages"><span>01 Receive</span><span>02 Judge</span><span>03 Act</span><span>04 Feedback</span></div><div class="agent-caption"><span class="agent-caption-index">01</span><div><strong></strong><p></p></div></div>';
  const floats=overlay.querySelector('.agent-floats'),quadrants=overlay.querySelector('.agent-quadrants'),heroStages=overlay.querySelector('.agent-hero-stages'),captionEl=overlay.querySelector('.agent-caption');
  const labels={};function makeLabel(key,text,cls=''){const e=document.createElement('div');e.className='agent-float-label '+cls;e.innerHTML=text;floats.appendChild(e);labels[key]=e;return e;}
- makeLabel('input','Available Information<small>INFORMATION</small>');makeLabel('memory','Memory<small>Historical Observations</small>','internal-state');makeLabel('resources','Resources<small>Budget · Holdings</small>','internal-state');makeLabel('judgment','Beliefs & Sentiment<small>Awaiting Judgment</small>','internal-state');makeLabel('order','Order / Wait<small>ACTION</small>');makeLabel('market','Market Execution<small>MARKET / MATCHING</small>');makeLabel('agent','G001','agent-label');makeLabel('asset','A001','asset-label');makeLabel('source','Public Information M-01');makeLabel('relay','Local Agent Relay');
+ makeLabel('input','Available Information<small>INFORMATION</small>');makeLabel('memory','Memory<small>Historical Observations</small>','internal-state');makeLabel('resources','Resources<small>Budget · Holdings</small>','internal-state');makeLabel('judgment','Beliefs & Sentiment<small>Awaiting Judgment</small>','internal-state');makeLabel('order','Order / Wait<small>ACTION</small>');makeLabel('market','Conceptual Matching<small>ILLUSTRATIVE FILL</small>');makeLabel('agent','G001','agent-label');makeLabel('asset','A001','asset-label');makeLabel('source','Public Information M-01');makeLabel('relay','Local Agent Relay');
  const coreTitle=document.createElement('div');coreTitle.className='agent-core-title';coreTitle.innerHTML='G001 · AGENT<small>DECISION UNIT</small>';floats.appendChild(coreTitle);
  function projectLabel(e,p,offx=0,offy=0){V.copy(p);world.localToWorld(V);V.project(camera);if(V.z>1||V.z< -1){e.style.display='none';return;}e.style.display='block';const hx=e.offsetWidth/2+8,hy=e.offsetHeight/2+8;e.style.left=clamp((V.x+1)*width/2+offx,hx,Math.max(hx,width-hx))+'px';e.style.top=clamp((-V.y+1)*height/2+offy,hy,Math.max(hy,height-hy))+'px';}
  function classificationPosition(i,progress=1){const a=M.agents[i],j=i%20,col=a.type%2===0?-1:1,row=a.type<2?1:-1,x=col*(aspect<1.1?1.35:2.15),y=row*(aspect<1.1?1.08:1.22)+.27,angle=j*2.39996,r=.22+.48*Math.sqrt((j+.5)/20),final=new THREE.Vector3(x+Math.cos(angle)*r,y+Math.sin(angle)*r*.62,Math.sin(j*2.1)*.24),start=new THREE.Vector3(Math.cos(i*2.39996)*.6,Math.sin(i*2.39996)*.6,Math.sin(i*1.3)*.3);return start.lerp(final,progress);}
@@ -6271,15 +6779,15 @@ function createAgentStage(callbacks){
    });
   }
 
- function caption(){if(P.page===0){const rows=[['01','Information Enters Observation','Public availability does not mean every agent immediately pays attention.'],['02','Attention Is Selective','The same message can be ignored or processed in depth.'],['03','Forming an Independent Judgment','Beliefs, sentiment, memory, and resources jointly enter the decision.'],['04',P.decision==='hold'?'Choose to Wait':'Turn Judgment into an Order',P.decision==='hold'?'Choosing not to act is also an action choice.':'An order carries a limit price and quantity and still requires a counterparty.'],['05',P.decision==='hold'?'No Execution in This Round':'Quotes Cross and a Trade Occurs',P.decision==='hold'?'No order is generated in this example; price remains at 100.':'Minimal matching example: 4 executed, 2 remaining.'],['06','Outcomes Return to the Next Observation','The execution price and the agent’s own holdings become new information.']];return rows[Math.min(5,Math.floor(P.t/2))];}if(P.page===1)return P.t<2?['01','Start with the Same Basic Agent','Each point retains its own information, beliefs, and resources.']:P.t<4?['02','Cross-Classification Along Two Dimensions','First distinguish the scope of interests, then action autonomy.']:['03','Four Color-Coded Identities Persist','The next act uses the same 80 Agents.'];const age=P.t-P.signalAt;return P.t<3?['01','Four Agent Types Embedded in One Network','Diamonds approach their objects of attention; the same color does not imply the same beliefs.']:age<0?['02','Distinguish Relationships from Attention','Blue-gray lines connect assets; colored dashed lines connect agents to their objects of attention.']:age<2?['03',P.signal==='public'?'Public News Is Observable by All Four Types':'Relevant Channels Reach Local Agents First',P.signal==='public'?'Purple rings illustrate information availability, not a physical propagation equation.':'Initially available only to local Agents connected to A001’s relevant channel.']:age<4?['04','Available Information Passes Through Attention','Some agents notice while others remain unprocessed; reactions also have different time lags.']:['05',P.signal==='public'?'Same Message, Different Reactions':'Non-Local Agents Receive Indirectly Through Relays','Buy intent, sell intent, and waiting can coexist; intent is not execution.'];}
+ function caption(){if(P.page===0){const rows=[['01','Information Enters Observation','Public availability does not mean every agent immediately pays attention.'],['02','Attention Is Selective','The same message can be ignored or processed in depth.'],['03','Forming an Independent Judgment','Beliefs, sentiment, memory, and resources jointly enter the decision.'],['04',P.decision==='hold'?'Choose to Wait':'Turn Judgment into an Order',P.decision==='hold'?'Choosing not to act is also an action choice.':'An order carries a limit price and quantity and still requires a counterparty.'],['05',P.decision==='hold'?'No Fill in This Round':'Quotes Cross (Illustrative Fill)',P.decision==='hold'?'No order is generated in this example; price remains at 100.':'Conceptual order-layer example: 4 illustrative fill, 2 remaining (not run in market-sim).'],['06','Outcomes Return to the Next Observation','The illustrative fill price and updated holdings feed back into the next observation.']];return rows[Math.min(5,Math.floor(P.t/2))];}if(P.page===1)return P.t<2?['01','Start with the Same Basic Agent','Each point retains its own information, beliefs, and resources.']:P.t<4?['02','Cross-Classification Along Two Dimensions','First distinguish the scope of interests, then action autonomy.']:['03','Four Color-Coded Identities Persist','The next act uses the same 80 Agents.'];const age=P.t-P.signalAt;return P.t<3?['01','Four Agent Types Embedded in One Network','Diamonds approach their objects of attention; the same color does not imply the same beliefs.']:age<0?['02','Distinguish Relationships from Attention','Blue-gray lines connect assets; colored dashed lines connect agents to their objects of attention.']:age<2?['03',P.signal==='public'?'Public News Is Observable by All Four Types':'Relevant Channels Reach Local Agents First',P.signal==='public'?'Purple rings illustrate information availability, not a physical propagation equation.':'Initially available only to local Agents connected to A001’s relevant channel.']:age<4?['04','Available Information Passes Through Attention','Some agents notice while others remain unprocessed; reactions also have different time lags.']:['05',P.signal==='public'?'Same Message, Different Reactions':'Non-Local Agents Receive Indirectly Through Relays','Buy intent, sell intent, and waiting can coexist; intent is not execution.'];}
  function updateLabels(){Object.values(labels).forEach(e=>e.style.display='none');captionEl.style.display='';if(P.bareNetwork){coreTitle.style.display='none';quadrants.hidden=true;heroStages.hidden=true;captionEl.style.display='none';return}coreTitle.style.display=P.page===0?'block':'none';quadrants.hidden=P.page!==1;heroStages.hidden=P.page!==0;if(P.page===0){
     const phase=Math.min(5,Math.floor(P.t/2)),hold=P.decision==='hold';
     labels.input.innerHTML='Available Information<small>OBSERVATION</small>';
     labels.judgment.innerHTML='Beliefs & Sentiment<small>'+(P.t<4?'Awaiting Judgment':hold?'Remain Waiting':P.decision==='buy'?'Bullish Judgment':'Bearish Judgment')+'</small>';
     labels.memory.innerHTML='Memory<small>'+(phase===1?'Read Prior Observations':phase===5?'Write Current Feedback':'Prior Observations')+'</small>';
-    labels.resources.innerHTML='Resources<small>'+(phase>=4&&!hold?'Updated After Execution':'Budget · Holdings')+'</small>';
+    labels.resources.innerHTML='Resources<small>'+(phase>=4&&!hold?'Updated After Illustrative Fill':'Budget · Holdings')+'</small>';
     labels.order.innerHTML=(hold&&P.t>=6?'Wait · No Order':'Order Output')+'<small>'+(P.t<6?'ACTION':hold?'NO ORDER':P.decision==='buy'?'BUY · 6':'SELL · 6')+'</small>';
-    labels.market.innerHTML=(P.t<8?'Market Matching':hold?'No Execution This Round':'Executed · 4')+'<small>'+(P.t<8?'WAITING':hold?'PRICE 100.00':'PRICE '+M.trade(P.decision).price.toFixed(2))+'</small>';
+    labels.market.innerHTML=(P.t<8?'Conceptual Matching':hold?'No Fill This Round':'Illustrative fill · 4')+'<small>'+(P.t<8?'WAITING':hold?'PRICE 100.00':'ILLUSTRATIVE '+M.trade(P.decision).price.toFixed(2))+'</small>';
     Object.entries(heroCoordinates).forEach(([k,p])=>{const inside=['memory','judgment','resources'].includes(k);projectLabel(labels[k],new THREE.Vector3(...p),0,inside?0:k==='market'?45:-42);labels[k].classList.toggle('emphasis',k==='input'&&phase===0||k==='memory'&&phase===1||k==='judgment'&&phase===2||k==='resources'&&phase>=3||k==='order'&&phase===3||k==='market'&&phase===4)});
     coreTitle.innerHTML='G001 · AGENT<small>DECISION UNIT</small>';projectLabel(coreTitle,new THREE.Vector3(0,1.85,0));
     heroStages.querySelectorAll('span').forEach((e,i)=>e.classList.toggle('active',i===(P.t<4?0:P.t<6?1:P.t<10?2:3)));
@@ -6379,13 +6887,13 @@ function createAssetRelationStage(callbacks){
    {short:'Possible Structures',title:'Two Spaces, One Synchronized Structural Jump.',body:'The hyperbolic disk and mixed representation appear side by side, sharing the same node entries, exits, technical states, and edge changes from the first part. Each can be dragged independently; geometric lengths without economic definitions are labeled display distances only.',math:'Euclidean: xᵢ∈ℝ³　Hyperbolic: uᵢ∈𝔻²　Mixed: (uᵢ,zᵢ)∈ℍ²×ℝ',note:'Coordinate mappings are implemented here without claiming that markets have been proven to belong to any particular geometry.',refs:[['Nickel & Kiela (2017) · Hyperbolic Embeddings ↗','https://arxiv.org/abs/1705.08039'],['Gu et al. (2019) · Mixed-Curvature Representations ↗','https://openreview.net/pdf?id=HJxeWnCcF7']]},
    {short:'My Structural Rules',title:'Synchronized Multi-Site Jumps Update the Structure.',body:'At seconds 4 and 11, three assets from different groups jump synchronously. After technical states update, new relations appear and some old relations weaken or exit; highlights gradually fade while structural changes persist. Price or sentiment alone does not change the technical network.',math:'zᵢ(t)→zᵢ(t⁺)；(V,A,W)(t⁺)=F[z(t⁺)]',note:'F is the explicit candidate update rule in this demonstration. Three sites change synchronously in each round and node and edge-weight updates are actually executed, but empirical validation remains pending.',refs:[['Shuman et al. (2013) · Foundations of Signal Processing on Graphs ↗','https://arxiv.org/abs/1211.0053']]}
   ]},
-  agent:{title:'Agent',en:'MARKET AGENTS',sub:'Individual Decisions · Four Identities · Embedded in the Asset Grid',steps:[
-   {short:'What Is an Agent?',title:'What Is an Agent?',body:'An Agent is an independent decision-maker: it observes currently available information, combines beliefs, memory, sentiment, and resources, then decides to buy, sell, or wait. Public availability does not imply simultaneous attention, identical understanding, or identical trading; attention is not ordering, and ordering is not execution.',math:'aᵢ,ₜ = πᵢ(Iᵢ,ₜ, Pₜ, bᵢ,ₜ, Rᵢ,ₜ)',note:'I is currently available information, P is current price, b contains beliefs and sentiment, and R is resources. Act one uses a minimal matching example: the agent submits 6 and the counterparty 4; crossing quotes execute 4 and leave 2. Waiting generates no order.',refs:[['Lux & Marchesi (1999) · Heterogeneous-Agent Interaction ↗','https://www.nature.com/articles/17290'],['Lopez-Lira (2025) · Strategy, Information-Set, and Resource Interfaces ↗','https://arxiv.org/abs/2504.10789']]},
-   {short:'Classification',title:'Classification',body:'The same basic agent is placed along two independent dimensions—free/non-free and local/non-local—to form four identities; the next act retains the same 80 Agents. These identities are model design choices. Local refers to the scope of interests, not a fixed activity radius; detailed autonomy rules remain to be defined.',math:'Free / Non-Free × Local / Non-Local',note:'Each type contains 20 Agents. All four can access information already public at the time; local agents also have direct relevant-channel access, while non-local agents may receive indirectly through relays. Colors mark identity only, not trading direction.',refs:[['Financial Market Simulation System Design Handbook v1.1 · Four Types, Resources, and Trading Interfaces','#manual-agent'],['Zhang et al., StockAgent · Heterogeneous-Agent Information Experiments ↗','https://arxiv.org/abs/2407.18957']]},
-   {short:'Embedded in the Structure',title:'Embedded in the Structure',body:'Four Agent types enter a spherical grid of 200 assets and 880 relationships. Diamonds are Agents, circles are assets, and colored dashed lines mark objects of attention. Messages change only agents’ available information and illustrated reactions; they do not directly rewrite asset technical states or relationships, and intent is not execution.',math:'Asset Relations G + Agent Attention H + Information Availability Iᵢ,ₜ',note:'Public messages and relevant channels are demonstrated separately. Availability, attention, judgment, and action are recorded independently; local Agents can directly access relevant channels, while non-local Agents may receive via local-Agent relays. Spatial positions are display arrangements, not action boundaries.',refs:[['Hong & Stein (1999) · Information-Processing Differences and Dynamic Responses ↗','https://users.ssc.wisc.edu/~cengel/IMF/HongSteinJF1999.pdf'],['Zhang et al., StockAgent · Multi-Agent Information and Reaction Interfaces ↗','https://arxiv.org/abs/2407.18957']]}
+  agent:{title:'Agent',en:'MARKET AGENTS',sub:'Individual Decisions · Four Conceptual Identities · Synthetic 200-Asset Grid',steps:[
+   {short:'What Is an Agent?',title:'What Is an Agent?',body:'An Agent is an independent decision-maker: it observes currently available information, combines beliefs, memory, sentiment, and resources, then decides to buy, sell, or wait. Public availability does not imply simultaneous attention, identical understanding, or identical trading; attention is not ordering, and ordering is not execution.',math:'aᵢ,ₜ = πᵢ(Iᵢ,ₜ, Pₜ, bᵢ,ₜ, Rᵢ,ₜ)',note:'I is currently available information, P is current price, b contains beliefs and sentiment, and R is resources. Act one shows a conceptual order-layer illustration: submitting 6 against counterparty 4 yields an illustrative fill of 4 and leaves 2 (order book not implemented or run in market-sim). Waiting generates no order.',refs:[['Lux & Marchesi (1999) · Heterogeneous-Agent Interaction ↗','https://www.nature.com/articles/17290'],['Lopez-Lira (2025) · Strategy, Information-Set, and Resource Interfaces ↗','https://arxiv.org/abs/2504.10789']]},
+   {short:'Classification',title:'Classification',body:'These four identities (action constraints × information scope: Free / Non-Free × Local / Non-Local) are a conceptual design dimension from the handbook; the market-sim experiment uses four information-access types instead: public, channel, structure, learning. Here 80 synthetic Agents (20 per identity) illustrate how scope and autonomy separate.',math:'Handbook Dimension: Free / Non-Free × Local / Non-Local　|　market-sim: Public / Channel / Structure / Learning',note:'Each conceptual identity contains 20 synthetic Agents. All four observe public information; local agents access direct channels, while non-local agents receive via relays. Colors mark identity only, not trading direction.',refs:[['Financial Market Simulation System Design Handbook v1.2.1 (v1.2 series) · §07–§12 ↗','https://github.com/weilanju/weilanju.github.io/blob/main/docs/design_handbook_v1.2.1_English.pdf'],['Zhang et al., StockAgent · Heterogeneous-Agent Information Experiments ↗','https://arxiv.org/abs/2407.18957']]},
+   {short:'Embedded in the Structure',title:'Embedded in a Synthetic 200-Asset Grid',body:'The 80 synthetic Agents enter a simulated spherical grid of 200 synthetic assets (A001–A200) and 880 relationships. Diamonds are Agents, circles are synthetic assets, and colored dashed lines mark objects of attention. Messages change only agents’ available information and illustrated reactions; intent is not execution.',math:'Synthetic Asset Grid G + Agent Attention H + Information Availability Iᵢ,ₜ',note:'Simulated example (not market data). Availability, attention, judgment, and action are recorded independently; spatial positions are display arrangements, not action boundaries.',refs:[['Hong & Stein (1999) · Information-Processing Differences and Dynamic Responses ↗','https://users.ssc.wisc.edu/~cengel/IMF/HongSteinJF1999.pdf'],['Design Handbook v1.2.1 (PDF) ↗','https://github.com/weilanju/weilanju.github.io/blob/main/docs/design_handbook_v1.2.1_English.pdf']]}
   ]},
   info:{title:'Information',en:'INFORMATION ENVIRONMENT',sub:'Information Mapping · Price and Value · Asset Correspondence',steps:[
-   {short:'Purpose',title:'How Does a Message Enter Price?',body:'Using only assets A and B and four Agents, the sequence demonstrates message arrival, heterogeneous reactions, order execution, and technical outcomes. Price can change before the technical structure; only after technical realization do value and relations update according to the specified rules.',math:'Message → Availability / Attention / Judgment → Order → Matching & Execution → Price Feedback',note:'Trading is disabled before second 7 to distinguish judgment from trading. Execution transfers cash and shares simultaneously; Agents that did not notice the message can still act as counterparties based on prior judgments. Technical realization begins at second 12, and A’s technical indicator gradually rises from 45 to 78 over 6 seconds.',refs:[['Hong & Stein (1999) · Information-Processing Differences and Market Reactions ↗','https://doi.org/10.1111/0022-1082.00184'],['Cohen & Frazzini (2008) · Research Background on Economic Links and Information Responses ↗','https://doi.org/10.1111/j.1540-6261.2008.01379.x']]},
+   {short:'Purpose',title:'How Does a Message Enter Price? (Synthetic Two-Asset Example)',body:'Using synthetic assets A and B and four conceptual Agents, this simulated sequence illustrates message arrival, heterogeneous reactions, conceptual order matching (illustrative fill), and technical realization. In the empirical market-sim experiment, realized prices are exogenous and no order book is run.',math:'Message → Availability / Attention / Judgment → Conceptual Order & Illustrative Fill → Feedback',note:'Simulated example (not market data). Conceptual matching opens at second 7 for visual separation of judgment vs. trading; technical realization begins at second 12 (A rises from 45 to 78 in this toy example).',refs:[['Design Handbook v1.2.1 · §08–§12 Information & Conceptual Order Layer ↗','https://github.com/weilanju/weilanju.github.io/blob/main/docs/design_handbook_v1.2.1_English.pdf'],['Cohen & Frazzini (2008) · Economic Links and Predictable Returns ↗','https://doi.org/10.1111/j.1540-6261.2008.01379.x']]},
    {short:'Representation',title:'One Axis Connecting the Same Asset.',body:'A 2D information mapping layer sits above; dynamic price and value surfaces interweave in the middle; a 2D asset grid sits below. Each asset’s vertical line connects its value point, price point, and information position.',math:'Asset identity is unchanged; planar positions are fixed, while price and value vary along the same axis.',note:'Visual elements are extracted from Empirical Process.html. The price surface currently uses daily market-cap shares from the source file, and the value surface uses technical-indicator shares; there is no live market connection. Temporal easing and spatial interpolation are for display only, and intersection does not indicate overvaluation or undervaluation.',refs:[['Visuals and Embedded Sequence: Empirical Process.html','#layer-source']]},
    {short:'Spherical Overview',title:'Wrapped into a Sphere, Explored Layer by Layer.',body:'The outermost layer is the yellow information mapping shell, enclosing interwoven price and value surfaces and the inner asset-grid sphere. Scroll inward to fade outer layers sequentially; scroll outward to restore them.',math:'Grid nodes, value points, price points, and mapping points correspond along the same radial axis.',note:'The sphere is another display of the same states. The wheel controls observation depth without changing data; automatic rotation and dragging are retained. No empirical workflow or research conclusion is presented here.',refs:[['Visual Elements Extracted from Empirical Process.html','#layer-source']]},
   ]}
@@ -6396,7 +6904,7 @@ function createAssetRelationStage(callbacks){
  const assetStage=createAssetRelationStage({onSelect:()=>{updateLive()}});
  const infoStage=createUnifiedInformationStudio({onSelect:selectAsset,onSeek:t=>window.integratedDemo.seek(t)});window.infoResearch=infoStage;
  function renderInfo(){infoStage.render({step,t:state.t,playing:state.playing,selected:state.selected,gain:state.gain,focus:state.infoFocus||'all',params:state.params})}
- function updateInfoLive(){if(step>0){const s=infoStage.state();$('p2fLive').innerHTML='<div class="xl-live"><b>'+s.asset+'</b> · '+s.count+' Assets<br>'+s.date+' · Embedded Source Replay<br><small>Price Surface: Daily Shares; Value Surface: Low-Frequency Technical Indicators</small></div>';return}const s=infoStage.state(),i=state.selected;$('p2fLive').innerHTML='<div class="if-reading">'+InformationWorld.assets[i].id+' · Price <strong>'+s.prices[i].toFixed(2)+'</strong> · Technical Indicator <strong>'+s.tech[i]+'</strong><br>'+(!state.params.trading?'Trading closed: messages continue updating while price remains at its initial value.':s.lastTrade?'Last Execution: '+s.lastTrade.qty+' shares · '+s.lastTrade.t.toFixed(2)+'s':'No execution yet; initial price retained.')+'</div>'}
+ function updateInfoLive(){if(step>0){const s=infoStage.state();$('p2fLive').innerHTML='<div class="xl-live"><b>'+s.asset+'</b> · '+s.count+' Assets<br>'+s.date+' · Embedded Source Replay<br><small>Price Surface: Daily Shares; Value Surface: Low-Frequency Technical Indicators</small></div>';return}const s=infoStage.state(),i=state.selected;$('p2fLive').innerHTML='<div class="if-reading">'+InformationWorld.assets[i].id+' · Price <strong>'+s.prices[i].toFixed(2)+'</strong> · Technical Indicator <strong>'+s.tech[i]+'</strong><br>'+(!state.params.trading?'Trading closed: messages continue updating while price remains at its initial value.':s.lastTrade?'Last Illustrative fill: '+s.lastTrade.qty+' units · '+s.lastTrade.t.toFixed(2)+'s':'No illustrative fill yet; initial price retained.')+'</div>'}
  function choices(kind,items,current){return '<div class="p2f-choice-row" data-control="'+kind+'">'+items.map(v=>'<button class="p2f-choice '+(current===v[0]?'active':'')+'" data-value="'+v[0]+'">'+v[1]+'</button>').join('')+'</div>'}
  function assetPicker(){return '<div class="p2f-assets">'+MechanismModel.assets.map((a,i)=>'<button class="p2f-asset '+(state.selected===i?'active':'')+'" data-asset="'+i+'" aria-label="Select Asset '+a.id+'">'+a.id+'</button>').join('')+'</div>'}
  function mathBlock(x){return '<details class="p2f-math"><summary>Modeling Notes</summary><div class="p2f-formula">'+x.math+'</div><p>'+x.note+'</p></details>'}
@@ -6404,22 +6912,22 @@ function createAssetRelationStage(callbacks){
   if(section==='asset'&&step===0)h='<b>Two Networks, Two Meanings</b>'+choices('network',[['economic','Economic Relations Network'],['correlation','Price-Correlation Network']],state.network)+'<small>Gold: Candidate Economic/Technical Links　Ice Blue: Synthetic Correlations</small>';
   if(section==='asset'&&step===1)h='<small>Hyperbolic and mixed spaces show synchronized structural jumps; drag within either structure to adjust its view independently and scroll to zoom.</small>';
   if(section==='asset'&&step===2)h=choices('compareInitial',[['current','Current Structure'],['initial','Initial Structure Comparison']],state.compareInitial?'initial':'current')+choices('realize',[['true','Technology Actually Realized'],['false','Message Forecast Only']],String(state.params.realize))+'<small>4s: 3 Synchronized Sites　11s: 3 Synchronized Sites　New Structure Persists After Highlights Fade</small>';
-  if(useLegacyStage()&&step===0)h=choices('decision',[['buy','Bullish'],['sell','Bearish'],['hold','Wait']],state.decision)+'<small>Submit 6 against counterparty 4; execution occurs only when quotes cross. Waiting generates no order.</small>';
+  if(useLegacyStage()&&step===0)h=choices('decision',[['buy','Bullish'],['sell','Bearish'],['hold','Wait']],state.decision)+'<small>Conceptual illustration: submit 6 vs. counterparty 4 → illustrative fill of 4, remaining 2. Waiting generates no order.</small>';
   if(useLegacyStage()&&step===1){const names=['Free × Local','Non-Free × Local','Free × Non-Local','Non-Free × Non-Local'];h='<div class="p2f-quadrants">'+names.map((n,i)=>'<button class="p2f-quad '+(state.agentType===i?'active':'')+'" style="--c:'+AGENT_COLORS[i]+'" data-agent="'+i+'"><i></i>'+n+'</button>').join('')+'</div>'+choices('agentType',[['-1','Compare All Four Types']],String(state.agentType))+'<small>80 Agents, 20 per type; colors distinguish identity only.</small>'}
   if(section==='agent'&&step===2)h=choices('signal',[['public','◎ Public Information'],['channel','⌁ A001 Relevant Channel']],state.signal)+'<small>Click a diamond to select an Agent or a circle to select an asset; drag to rotate and scroll to zoom.</small>';
-  if(section==='info'&&step===0)h='<div class="if-message-card">M-01 · A May Achieve a Technical Breakthrough<small>Forecast at 1s, matching opens at 7s, and technical outcomes begin at 12s.</small></div><span class="if-control-label">Two Outcomes After Second 12</span>'+choices('realize',[['true','Technology Realized'],['false','Not Yet Realized']],String(state.params.realize))+'<small>Both scenarios share the prior message, order, and execution history. Switch scenarios and click “Replay” for continuous comparison.</small>';
+  if(section==='info'&&step===0)h='<div class="if-message-card">M-01 · Synthetic Forecast on Asset A<small>1s forecast · 7s conceptual matching (illustrative fill) · 12s technical outcome.</small></div><span class="if-control-label">Two Synthetic Scenarios After Second 12</span>'+choices('realize',[['true','Technology Realized'],['false','Not Yet Realized']],String(state.params.realize))+'<small>Simulated example (not market data). Switch scenarios and click “Replay” to compare.</small>';
   if(section==='info'&&step===1)h='<span class="xl-control-label">Explore by Layer</span><div class="xl-controls">'+[['all','Complete Layers'],['info','Information Mapping'],['price','Price Surface'],['value','Value Surface'],['axes','Asset Axes']].map(([k,v])=>'<button class="xl-control '+(k==='all'?'active':'')+'" data-xl-focus="'+k+'">'+v+'</button>').join('')+'</div><span class="xl-control-label">Information Display</span><div class="xl-controls"><button class="xl-control active" data-xl-mode="channel">Propagate Along Channels</button><button class="xl-control" data-xl-mode="public">Public Simultaneous Illumination</button><button class="xl-control" data-xl-action="pulse">Send Another</button></div><span class="xl-control-label">Observation View</span><div class="xl-controls"><button class="xl-control active" data-xl-action="spin">Auto Rotate · On</button><button class="xl-control" data-xl-action="reset">Reset View</button></div><small class="xl-help">Price changes quickly and value slowly. Nodes use neutral identifiers; information animations illustrate propagation form only.</small>';
   if(section==='info'&&step===2)h='<span class="xl-control-label">Observation Mode</span><div class="xl-controls"><button class="xl-control active" data-xl-action="spin">Auto Rotate · On</button><button class="xl-control" data-xl-action="reset">Return to Outermost Layer</button></div><small class="xl-help">Scroll Up: Enter and Fade Outer Layers.<br>Scroll Down: Restore the Complete Sphere.<br>You can also click a layer name below the view to jump.</small><span class="xl-control-label xl-control-extra">Information Display</span><div class="xl-controls xl-control-extra"><button class="xl-control active" data-xl-mode="channel">Channel Propagation</button><button class="xl-control" data-xl-mode="public">Public Broadcast</button></div>';
   return h+mathBlock(x);
  }
  function updateSteps(){$('p2fSteps').innerHTML=CONTENT[section].steps.map((x,i)=>'<button class="p2f-step '+(i===step?'active':'')+'" data-step="'+i+'" aria-label="Step '+(i+1)+': '+x.short+'">0'+(i+1)+' · '+x.short+'</button>').join('')}
- function updateUI(force=false){if(!section){$('p2fInspector').innerHTML='';$('p2fLive').textContent='';return}const s=CONTENT[section],x=s.steps[step];if(force){$('p2fDetailEyebrow').textContent='COMPONENT / '+s.en;$('p2fDetailTitle').textContent=s.title;$('p2fDetailSub').textContent=s.sub;$('p2fStepCount').textContent='STEP 0'+(step+1)+' / 03';$('p2fStepTitle').textContent=x.title;$('p2fStepBody').textContent=x.body;$('p2fRefs').innerHTML=x.refs.map(r=>'<a class="p2f-ref" href="'+r[1]+'" '+(r[1][0]==='#'?'':'target="_blank" rel="noopener"')+'>'+r[0]+'</a>').join('');$('p2fInspector').innerHTML=inspectorHTML();updateSteps()}$('p2fPlay').textContent=state.playing?'Ⅱ':'▶';$('p2fTime').textContent=state.t.toFixed(1)+' / '+duration().toFixed(1)+' s'}
+ function updateUI(force=false){if(!section){$('p2fInspector').innerHTML='';$('p2fLive').textContent='';return}const s=CONTENT[section],x=s.steps[step];if(force){$('p2fDetailEyebrow').textContent='COMPONENT / '+s.en;$('p2fDetailTitle').textContent=s.title;$('p2fDetailSub').textContent=s.sub;const isRealReplay=(section==='info'&&step>0);const badge=$('p2fDataBadge');if(badge){badge.className='data-badge '+(isRealReplay?'real':'sim');badge.textContent=isRealReplay?'REAL DATA · 33 firms, 2023–2026':'SIMULATED EXAMPLE · not market data';}const disc=$('p2fDisclaimer');if(disc){disc.textContent=isRealReplay?'Real-Market Share Replay (33 firms, 2023–2026, v3 pack) · Non-Causal Display':'Simulated Example / Candidate Mechanisms · Not Market Data';}const ob=$('p2fOrderBanner');if(ob){if(section==='agent'||(section==='info'&&step===0)){ob.hidden=false;ob.innerHTML=section==='agent'?'<b>Conceptual Order &amp; Agent Notice:</b> Conceptual illustration of the order layer specified in Design Handbook §11–§12 (v1.2.1) — <b>not implemented, not run</b>; no result in this portfolio depends on it. These four identities (Free/Non-Free × Local/Non-Local) are a handbook design dimension; <code>market-sim/</code> uses four information types: <b>public, channel, structure, learning</b>.':'<b>Conceptual Order-Layer Notice:</b> Conceptual illustration of the order layer specified in Design Handbook §11–§12 (v1.2.1) — <b>not implemented, not run</b>; no result in this portfolio depends on it.';}else{ob.hidden=true;}}$('p2fStepCount').textContent='STEP 0'+(step+1)+' / 03';$('p2fStepTitle').textContent=x.title;$('p2fStepBody').textContent=x.body;$('p2fRefs').innerHTML=x.refs.map(r=>'<a class="p2f-ref" href="'+r[1]+'" '+(r[1][0]==='#'?'':'target="_blank" rel="noopener"')+'>'+r[0]+'</a>').join('');$('p2fInspector').innerHTML=inspectorHTML();updateSteps()}$('p2fPlay').textContent=state.playing?'Ⅱ':'▶';$('p2fTime').textContent=state.t.toFixed(1)+' / '+duration().toFixed(1)+' s'}
  function updateLive(){if(!section)return;if(section==='info'){updateInfoLive();return;}if(section==='asset'&&step<2){updateAssetLive();return}if(useLegacyStage()){updateLegacyLive();return}const s=stage.state(),asset=s.selected,i=MechanismModel.assets.findIndex(a=>a.id===asset),q=s.quotes,last=s.lastTrade;let html='';
   if(section==='asset'&&step===0)html='Current Display:'+(s.network==='economic'?'Economic Relations Network':'Price-Correlation Network')+'<br>The two networks share identities, not economic meanings.';
   else if(section==='asset'&&step===1)html='Representation:'+({normal:'Euclidean Space',hyper:'Hyperbolic Disk',mixed:'Mixed Space'}[s.representation])+'<br>8 Assets · 11 Economic Edges · Identities Unchanged';
   else if(section==='asset'&&step===2)html='Network Identities:'+s.activeNodes.join(' · ')+'<br>Added '+(s.entered.join('、')||'0')+'　Exited '+(s.exited.join('、')||'0')+'　A Technical Indicator '+s.tech[0];
   else if(useLegacyStage()&&step===1)html='Current Type:'+(s.agentType<0?'All Four Types':['Free × Local','Non-Free × Local','Free × Non-Local','Non-Free × Non-Local'][s.agentType])+'<br>Cash Conservation '+Math.round(s.accounts.cash).toLocaleString()+' · Shares '+s.accounts.shares;
-  else{html=asset+'　Signal '+s.signals[i].toFixed(3)+'　Price '+s.prices[i].toFixed(2)+'　Technology '+s.tech[i];if(q)html+='<br>Bid '+q[0].bid.toFixed(2)+'／'+q[1].bid.toFixed(2)+'　Ask '+q[0].ask.toFixed(2)+'／'+q[1].ask.toFixed(2);html+='<br>'+(last?'Last Execution: '+last.price.toFixed(2)+' · '+last.qty+' shares':'No execution yet; previous price of 100.00 retained');if(section==='info'&&step>0)html+='<br>r / R = '+(s.pricePoints[i].radius/MechanismModel.R).toFixed(3)+' · Mapping Only'}
+  else{html=asset+'　Signal '+s.signals[i].toFixed(3)+'　Price '+s.prices[i].toFixed(2)+'　Technology '+s.tech[i];if(q)html+='<br>Bid '+q[0].bid.toFixed(2)+'／'+q[1].bid.toFixed(2)+'　Ask '+q[0].ask.toFixed(2)+'／'+q[1].ask.toFixed(2);html+='<br>'+(last?'Last Illustrative fill: '+last.price.toFixed(2)+' · '+last.qty+' units':'No illustrative fill yet; baseline 100.00 retained');if(section==='info'&&step>0)html+='<br>r / R = '+(s.pricePoints[i].radius/MechanismModel.R).toFixed(3)+' · Mapping Only'}
   $('p2fLive').innerHTML=html;updateNote(s)}
  function updateNote(s){let title='',text='';if(section==='asset'){if(step===0){title=s.network==='economic'?'Economic relations are not price correlation.':'Co-movement is not a supply chain.';text='Switch networks to inspect different relationship meanings for the same assets.'}else if(step===1){title='Same Relationships, Three Coordinate Systems.';text='Without an economic definition, geometric distance is a display distance only.'}else if(s.compareInitial){title='Initial Structure Comparison';text='Q remains in the network; N₁ and N₂ have not entered; the simulation clock is retained.'}else if(s.t<.8){title='Initial Technical Structure';text='Awaiting a message forecast; nodes and edges remain unchanged.'}else if(s.t<12){title='Message Appeared, Technology Not Yet Realized';text='Agents can react, but the message has not rewritten the technical-relation network.'}else{title=s.params.realize?'Technology Realized: Structure Updated':'Forecast Retained Without Structural Changes';text=s.params.realize?'N₁ and N₂ enter and Q exits; A—B strengthens, A—C disappears, and A—G is added.':'Price and sentiment changes alone do not change the technical network.'}}
   if(useLegacyStage()){if(step===0){title='Available Information → Judgment → Quote → Execution';text='Message creation, arrival, understanding, ordering, and execution are timed separately.'}else if(step===1){title='Repositioning does not change permissions.';text='The four identities are defined by action constraints and information scope, not distance from the cloud.'}else{title=s.params.trading?'Order Interaction Is Forming Price':'Information Continues Spreading; Trading Is Closed';text=s.params.trading?'The execution price updates only when compatible quotes are actually settled.':'All assets retain their latest execution prices; quotes do not directly move prices.'}}
@@ -6432,7 +6940,7 @@ function createAssetRelationStage(callbacks){
  function updateAssetLive(){const s=assetStage.state();if(step===0){$('p2fLive').innerHTML=(s.event?s.event.name:'Initial Structure')+'<br>Active '+s.nodeCount+' · Active Links '+s.edgeCount+'<br>Total Entered '+s.entered+' · Exit '+s.exited;const b=$('mechanismNote').querySelector('b'),p=$('mechanismNote').querySelector('span');b.textContent=s.event?s.event.name:'Starts with 27 assets.';p.textContent=s.event?s.event.desc:'After technical-state jumps, nodes and edges update according to the specified rules.'}else{$('p2fLive').innerHTML='Hyperbolic / Mixed: Synchronized Structural Jumps<br>'+(s.event?s.event.name:'Initial Structure')+' · Active '+s.nodeCount+' · Links '+s.edgeCount;$('mechanismNote').querySelector('b').textContent='Both spaces present the same structural jump synchronously.';$('mechanismNote').querySelector('span').textContent='Node entry, exit, edge changes, and highlight fading remain synchronized; the mixed-space vertical axis is a technical-indicator attribute, not price.'}}
  function legacyOptions(dt=0){return{page:section==='agent'?step:2,t:state.t,dt,playing:state.playing,decision:state.decision,type:state.agentType,selected:state.selectedAgent,asset:state.selectedNetworkAsset,signal:state.signal,compareInitial:state.compareInitial,realize:state.params.realize,bareNetwork:section==='asset'&&step===2}}
  function renderLegacy(dt=0){legacyStage.render(legacyOptions(dt))}
- function updateLegacyLive(){const r=legacyStage.status(state);if(step===0){const phases=['Information Enters Observation','Attention Is Selective','Forming an Independent Judgment','Turn Judgment into an Order','Orders & Execution','Outcomes Return to the Next Observation'];$('p2fLive').innerHTML='Current Phase: '+phases[Math.min(5,Math.floor(state.t/2))]+'<br>'+(state.t<6?'Awaiting judgment; no order submitted':state.decision==='hold'?'Waiting: no order; price remains 100':state.t<8?'Order submitted; awaiting market matching':'Filled '+r.trade.qty+' · Remaining '+r.trade.remaining+' · Price '+r.trade.price)}else if(step===1){$('p2fLive').innerHTML='Current Type:'+(state.agentType<0?'All Four Types':r.agentType.name)+'<br>80 Agents · 20 per Type · Identities Persist in the Next Act'}else if(section==='asset'){const j=legacyStage.state();$('p2fLive').innerHTML=(r.asset?r.asset.id+' · Selected Asset':j.jumpWave?'Synchronised jump wave '+j.jumpWave:'Awaiting the First Synchronized Jump')+'<br>Updated '+j.syncJumpCount+' Nodes · Visible Relations '+j.visibleEdgeCount+'<br>3 Synchronized Sites per Round · Highlights Fade'}else{const focus=r.asset?r.asset.id+' · Watchers '+r.assetWatchers.length:r.agent.id+' · '+r.agentInfo.via+'<br>'+({'Buy intent':'Buy Intent','Sell intent':'Sell Intent','Watch':'Wait'}[r.agentInfo.action]||r.agentInfo.action);$('p2fLive').innerHTML=focus+'<br>Available '+r.available+' · Noticed '+r.noticed+'<br>Buy Intent '+r.reactions[0]+' · Sell Intent '+r.reactions[1]+' · Wait '+r.reactions[2]}}
+ function updateLegacyLive(){const r=legacyStage.status(state);if(step===0){const phases=['Information Enters Observation','Attention Is Selective','Forming an Independent Judgment','Turn Judgment into an Order','Orders & Execution','Outcomes Return to the Next Observation'];$('p2fLive').innerHTML='Current Phase: '+phases[Math.min(5,Math.floor(state.t/2))]+'<br>'+(state.t<6?'Awaiting judgment; no order submitted':state.decision==='hold'?'Waiting: no order; price remains 100':state.t<8?'Order submitted; awaiting conceptual matching':'Illustrative fill '+r.trade.qty+' · Remaining '+r.trade.remaining+' · Illustrative Price '+r.trade.price)}else if(step===1){$('p2fLive').innerHTML='Current Type:'+(state.agentType<0?'All Four Types':r.agentType.name)+'<br>80 Agents · 20 per Type · Identities Persist in the Next Act'}else if(section==='asset'){const j=legacyStage.state();$('p2fLive').innerHTML=(r.asset?r.asset.id+' · Selected Asset':j.jumpWave?'Synchronised jump wave '+j.jumpWave:'Awaiting the First Synchronized Jump')+'<br>Updated '+j.syncJumpCount+' Nodes · Visible Relations '+j.visibleEdgeCount+'<br>3 Synchronized Sites per Round · Highlights Fade'}else{const focus=r.asset?r.asset.id+' · Watchers '+r.assetWatchers.length:r.agent.id+' · '+r.agentInfo.via+'<br>'+({'Buy intent':'Buy Intent','Sell intent':'Sell Intent','Watch':'Wait'}[r.agentInfo.action]||r.agentInfo.action);$('p2fLive').innerHTML=focus+'<br>Available '+r.available+' · Noticed '+r.noticed+'<br>Buy Intent '+r.reactions[0]+' · Sell Intent '+r.reactions[1]+' · Wait '+r.reactions[2]}}
  function applyStage(resetTime=false){if(resetTime)state.t=0;document.body.classList.toggle('p2f-dedicated',!!section);document.body.classList.toggle('legacy-agent',useLegacyStage());document.body.classList.toggle('information-story',section==='info');document.body.classList.toggle('layer-presentation',section==='info'&&step>0);document.body.classList.toggle('agent-hero-view',section==='agent'&&step===0);document.body.classList.toggle('agent-class-view',section==='agent'&&step===1);document.body.classList.toggle('asset-relation',isAssetRelation());document.body.classList.toggle('asset-triptych',section==='asset'&&step===1);document.body.classList.toggle('asset-jump-playback',section==='asset'&&step===0);$('agentOverlay').classList.toggle('active',useLegacyStage());if(window.threeWorld&&threeWorld.ready&&section)threeWorld.play(false);if(section==='info'){infoStage.resize();renderInfo()}else if(useLegacyStage()){if(resetTime)legacyStage.resetView();legacyStage.resize();renderLegacy()}else if(isAssetRelation()){if(resetTime)assetStage.resetView();assetStage.resize();renderAsset()}else if(section){stage.configure({section,step,t:state.t,playing:state.playing,gain:state.gain,representation:state.representation,network:state.network,agentType:state.agentType,compareInitial:state.compareInitial,priceSurface:state.priceSurface!==false,valueSurface:state.valueSurface!==false,params:state.params});stage.select(state.selected);stage.resize();stage.render(0,true)}else if(window.threeWorld&&threeWorld.ready){const w=threeWorld;w.play(false);w.setDate('2025-01-27');w.select('NVDA');['info','relations','priceSurface','valueSurface','agents','core','labels','axes'].forEach(k=>w.setLayer(k,true));w.setGain(.22);w.setValueOpacity(.30);w.setInfoGain(1.08);w.setMode('stacked');w.setView({yaw:-.62,pitch:.34,dist:7.15});w.render()}updateUI(true);updateLive()}
  function openSection(name){if(!CONTENT[name])return;state.infoFocus='all';if(name==='info')state.gain=2.5;section=name;step=0;state.playing=!reduced;state.params={...MechanismModel.defaults,realize:name==='info'};state.representation='normal';state.network='economic';state.agentType=-1;state.compareInitial=false;state.decision='buy';state.signal='public';state.selectedAgent=0;state.selectedNetworkAsset=null;document.body.classList.add('p2f-child');$('p2fDetail').setAttribute('aria-hidden','false');document.querySelectorAll('.p2f-component').forEach(b=>b.classList.toggle('active',b.dataset.section===name));applyStage(true);cue()}
  function setStep(n){if(!section)return;if(section==='info'){step=clamp(n,0,2);applyStage(false);cue();return;}step=clamp(n,0,2);state.playing=!reduced;state.params.realize=section==='asset'&&step===2;state.compareInitial=false;applyStage(true);cue()}
@@ -6448,7 +6956,11 @@ function createAssetRelationStage(callbacks){
  async function toggleSound(){try{if(!audio)audio=initAudio();if(!audio)return false;soundOn=!soundOn;if(soundOn){await audio.ctx.resume();audio.master.gain.setTargetAtTime(.25,audio.ctx.currentTime,.05);cue()}else audio.master.gain.setTargetAtTime(0,audio.ctx.currentTime,.04);$('p2fSound').textContent=soundOn?'♫':'♪';$('p2fSound').setAttribute('aria-pressed',String(soundOn));return soundOn}catch(e){soundOn=false;return false}}
  async function fullscreen(){try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen();return!!document.fullscreenElement}catch(e){return false}}
  document.querySelectorAll('.p2f-component').forEach(b=>{b.addEventListener('click',()=>openSection(b.dataset.section));b.addEventListener('mouseenter',()=>{const g=document.querySelector('[data-line="'+b.dataset.section+'"]');if(g)g.classList.add('hot')});b.addEventListener('mouseleave',()=>{const g=document.querySelector('[data-line="'+b.dataset.section+'"]');if(g)g.classList.remove('hot')})});$('p2fBack').addEventListener('click',goOverview);$('p2fSteps').addEventListener('click',e=>{const b=e.target.closest('[data-step]');if(b)setStep(+b.dataset.step)});$('p2fDetail').addEventListener('click',e=>{const a=e.target.closest('[data-agent]');if(a){setControl('agentType',a.dataset.agent);return}const asset=e.target.closest('[data-asset]');if(asset){selectAsset(asset.dataset.asset);return}const sourceLink=e.target.closest('a[href="#layer-source"]');if(sourceLink){e.preventDefault();alert('Graphics source: companion page "Empirical Process".\nThis page reuses only display elements (stacked discs, surfaces, light points, and the sphere). Embedded data are market-cap shares and technical-indicator shares; there is no live market feed.');return}const manual=e.target.closest('a[href="#manual-agent"],a[href="#info-assumptions"]');if(manual){e.preventDefault();document.querySelector('.p2f-math').open=true;return}const b=e.target.closest('[data-value]');if(b)setControl(b.parentElement.dataset.control,b.dataset.value)});$('p2fDetail').addEventListener('input',e=>{if(e.target.dataset.range==='gain'){state.gain=+e.target.value;e.target.nextElementSibling.value=state.gain.toFixed(2);if(section==='info'){renderInfo();updateLive();return;}stage.configure({gain:state.gain});stage.render(0,true);updateLive()}});$('p2fPlay').addEventListener('click',()=>play());$('p2fOnce').addEventListener('click',once);$('p2fReplay').addEventListener('click',replay);$('p2fReset').addEventListener('click',()=>{if(section==='info'){infoStage.resetView();renderInfo()}else if(useLegacyStage()){legacyStage.resetView();renderLegacy()}else if(isAssetRelation()){assetStage.resetView();renderAsset()}else{stage.resetView();stage.render(0,true)}});$('p2fSound').addEventListener('click',toggleSound);$('p2fFullscreen').addEventListener('click',fullscreen);
- window.addEventListener('keydown',e=>{if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)||e.target.isContentEditable)return;let h=true;if(e.key==='Escape')goOverview();else if(e.key==='ArrowRight'&&section)setStep(step+1);else if(e.key==='ArrowLeft'&&section)setStep(step-1);else if((e.key==='ArrowDown'||e.key==='ArrowUp')&&section){const current=step,delta=e.key==='ArrowDown'?1:-1;openSection(order[(order.indexOf(section)+delta+order.length)%order.length]);setStep(current)}else if(['1','2','3'].includes(e.key))openSection(order[+e.key-1]);else if(e.key==='0')goOverview();else if(e.key===' '&&section)play();else if(e.key.toLowerCase()==='m')toggleSound();else if(e.key.toLowerCase()==='f')fullscreen();else h=false;if(h){e.preventDefault();e.stopImmediatePropagation()}},true);
+ function enterObservatory(){section=null;step=0;state.playing=false;document.body.classList.remove('p2f-mode','p2f-child','p2f-dedicated','legacy-agent','information-story','layer-presentation','agent-hero-view','agent-class-view','asset-relation','asset-triptych','asset-jump-playback');$('p2fUI').hidden=true;$('p2fDetail').setAttribute('aria-hidden','true');if(window.threeWorld&&threeWorld.ready){threeWorld.setMode('stacked');window.dispatchEvent(new Event('resize'));threeWorld.render();}}
+ function returnToOverview(){if(window.threeWorld&&threeWorld.ready)threeWorld.play(false);$('p2fUI').hidden=false;document.body.classList.add('p2f-mode');goOverview();window.dispatchEvent(new Event('resize'));}
+ ['enterObservatoryBtn','enterObservatoryTop'].forEach(id=>{const b=$(id);if(b)b.addEventListener('click',enterObservatory);});
+ if($('backToOverviewBtn'))$('backToOverviewBtn').addEventListener('click',returnToOverview);
+ window.addEventListener('keydown',e=>{if(!document.body.classList.contains('p2f-mode'))return;if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)||e.target.isContentEditable)return;let h=true;if(e.key==='Escape')goOverview();else if(e.key==='ArrowRight'&&section)setStep(step+1);else if(e.key==='ArrowLeft'&&section)setStep(step-1);else if((e.key==='ArrowDown'||e.key==='ArrowUp')&&section){const current=step,delta=e.key==='ArrowDown'?1:-1;openSection(order[(order.indexOf(section)+delta+order.length)%order.length]);setStep(current)}else if(['1','2','3'].includes(e.key))openSection(order[+e.key-1]);else if(e.key==='0')goOverview();else if(e.key===' '&&section)play();else if(e.key.toLowerCase()==='m')toggleSound();else if(e.key.toLowerCase()==='f')fullscreen();else h=false;if(h){e.preventDefault();e.stopImmediatePropagation()}},true);
  window.addEventListener('resize',()=>{if(section==='info'){infoStage.resize();renderInfo()}else if(useLegacyStage()){legacyStage.resize();renderLegacy()}else if(isAssetRelation()){assetStage.resize();renderAsset()}else if(section){stage.resize();stage.render(0,true)}});
  function tick(now){const dt=Math.min((now-last)/1000,.06);last=now;if(window.deckActive===false||document.hidden){requestAnimationFrame(tick);return}if(section){const d=duration();if(state.playing&&!document.hidden){state.t=Math.min(d,state.t+dt);if(state.t===d){if(isAssetRelation()||(section==='info'&&step>0))state.t=0;else state.playing=false}}if(section==='info')renderInfo();else if(useLegacyStage())renderLegacy(dt);else if(isAssetRelation())renderAsset(dt);else{stage.configure({t:state.t,playing:state.playing});stage.render(dt)}if(now-lastLive>220){updateLive();updateUI();lastLive=now}}requestAnimationFrame(tick)}
  function init(){if(!(window.threeWorld&&threeWorld.ready)){setTimeout(init,60);return}if(location.hash==='#agent'||location.hash==='#asset'||location.hash==='#info')openSection(location.hash.slice(1));else goOverview()}
